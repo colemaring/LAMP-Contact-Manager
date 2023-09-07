@@ -56,3 +56,11 @@
 .register-button:hover {
     background-color: rgb(54, 54, 54);
 }
+
+.link {
+    text-decoration: none;
+}
+
+.link:visited {
+    color: white;
+}
