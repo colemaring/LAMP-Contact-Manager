@@ -19,7 +19,6 @@
     position: relative;
 }
 
-/*
 .search-bar-container {
     background-color: rgb(49, 49, 49);
     display: flex;
@@ -28,20 +27,6 @@
     height: 38px;
     width: 100%;
     max-width: 800px;
-    position: fixed;
-    top: 224px;
-    z-index: 200;
-    padding-top: 10px;
-}*/
-.search-bar-container {
-    background-color: rgb(49, 49, 49);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 38px;
-    width: 100%;
-    max-width: 800px;
-    padding-top: 10px;
 }
 
 .search-bar {
@@ -104,6 +89,17 @@
     border-bottom-left-radius: 8px;
     color: black;
     border-bottom-right-radius: 8px;
+}
+
+.contact-box-shadow {
+    display: flex;
+    flex-direction: column;
+    height: 592px;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 0 10px 5px rgb(32, 32, 32);
+    padding: 3px 0 0 0;
+    border-radius: 8px;
 }
 
 .contact-list {
@@ -169,11 +165,6 @@
 ::-webkit-scrollbar {
     width: 15px;
 }
-
-/*
-::-webkit-scrollbar-track {
-    background: gray;
-}*/
 
 ::-webkit-scrollbar-thumb {
     background: rgb(168, 168, 168);

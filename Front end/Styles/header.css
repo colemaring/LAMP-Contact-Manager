@@ -22,22 +22,21 @@
     padding: 0 10px;
 }
 
-.login-register-container {
+.header-button-container {
     display: flex;
     align-items: center;
     justify-content: end;
-    padding-right: 150px;
+    padding-right: 0px;
 }
 
-.login-register-button-container {
+.logout-button-container {
     width: 200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.login-button,
-.register-button {
+.logout-button {
     padding: 8px 10px;
     font-size: 22px;
     background-color: rgb(160, 160, 160);
@@ -48,16 +47,17 @@
     transition: background 0.3s;
 }
 
-.login-button {
+.logout-button {
     padding: 8px 15px;
 }
 
-.login-button:hover,
+.logout-button:hover,
 .register-button:hover {
     background-color: rgb(54, 54, 54);
 }
 
 .link {
+    color: white;
     text-decoration: none;
 }
 

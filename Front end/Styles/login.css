@@ -1,0 +1,47 @@
+.login-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 250px;
+    width: 400px;
+    background-color: rgb(26, 26, 26);
+    padding: 25px 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px 3px rgb(26, 26, 26);
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    font-size: 24px;
+}
+
+#username,
+#password,
+#login {
+    height: 40px;
+    font-size: 20px;
+    padding-left: 10px;
+    border-radius: 6px;
+}
+
+#login {
+    background-color: black;
+    color: white;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+a,
+a:visited {
+    color: white;
+}
+
+.register-container {
+    height: 15px;
+}
