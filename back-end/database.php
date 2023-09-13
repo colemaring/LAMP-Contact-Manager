@@ -6,10 +6,17 @@ class DataBase {
 
     public function __construct() {
         try {
-            $this->db = new PDO('mysql:host=localhost;dbname=TEST1', 'root', "");
+            $this->db = new PDO('mysql:host=localhost;dbname=test', 'root', "");
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             die('Error: ' . $e->getMessage() . "\n");
+        }
+
+        if ($this->db != null) {
+            echo "Connected to the database.\n";
+        }
+        else {
+            echo "Failed to connect to the database.\n";
         }
     }
 
