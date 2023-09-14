@@ -6,7 +6,7 @@ class DataBase {
 
     public function __construct() {
         try {
-            $this->db = new PDO('mysql:host=localhost;dbname=test', 'root', "");
+            $this->db = new PDO('mysql:host=localhost;dbname=users', 'root', "");
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             die('Error: ' . $e->getMessage() . "\n");

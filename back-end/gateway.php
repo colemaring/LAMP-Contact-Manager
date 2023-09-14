@@ -12,8 +12,7 @@ class Gateway {
 
     public function createUser(Array $data) {
 
-        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-
+        $sql = "INSERT INTO user (username, password) VALUES (?, ?)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$data['username'], $data['password']]);
 
@@ -23,5 +22,5 @@ class Gateway {
 
 $gate = new Gateway();
 $gate->createUser([
-    'username' => 'John1234',
-    'password' => 'Doe1234']);
+    'username' => 'John',
+    'password' => 'Doe']);
