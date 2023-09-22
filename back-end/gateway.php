@@ -22,12 +22,12 @@ class Gateway {
 
         $sql = "INSERT INTO contacts (id, firstname, lastname, email, phone, record) VALUES (:id, :firstname, :lastname, :email, :phone, :record)";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute(['id' => $data['id'], 'firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email'], 'phone' => $data['phone'], 'record' => $data['record']])
+        $stmt->execute(['id' => $data['id'], 'firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email'], 'phone' => $data['phone'], 'record' => $data['record']]);
 
         return $this->db->lastInsertId();
     }
 
-    publlic function updateContact(Array $data, $contact_id) {
+    public function updateContact(Array $data, $contact_id) {
             
         $sql = "UPDATE contacts SET firstname = :firstname, lastname = :lastname, email = :email, phone = :phone, WHERE contact_id = :contact_id";
         $stmt = $this->db->prepare($sql);
