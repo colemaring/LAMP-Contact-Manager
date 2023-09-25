@@ -1,167 +1,166 @@
 .contact-body {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: start;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: start;
 }
 
 .contact-box-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 75rem;
-    border: 2px solid black;
-    border-radius: 8px;
-    box-shadow: 0 0 30px 0 rgb(15, 15, 15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 75rem;
+  border: 2px solid black;
+  border-radius: 8px;
+  box-shadow: 0 0 15px 0 rgb(15, 15, 15);
 }
 
 .search-bar-container {
-    background-color: rgb(49, 49, 49);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 41px;
-    width: 100%;
-    border-top-right-radius: 7px;
-    border-top-left-radius: 7px;
+  background-color: rgb(49, 49, 49);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 41px;
+  width: 100%;
+  border-top-right-radius: 7px;
+  border-top-left-radius: 7px;
 }
 
 .search-bar {
-    flex: 1;
-    /* width: 30rem; */
-    height: 37px;
-    border: none;
-    border-bottom: 2px solid black;
-    border-top-left-radius: 7px;
-    box-shadow: inset 0 0 5px black;
-    font-size: 24px;
-    padding-left: 10px;
+  flex: 1;
+  /* width: 30rem; */
+  height: 37px;
+  border: none;
+  border-bottom: 2px solid black;
+  border-top-left-radius: 7px;
+  box-shadow: inset 0 0 5px black;
+  font-size: 24px;
+  padding-left: 10px;
 }
 
 .search-button,
 .new-contact-button {
-    background-color: gray;
-    height: 20px;
-    width: 42px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    cursor: pointer;
-    transition: background 0.3s;
+  background-color: gray;
+  height: 20px;
+  width: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 .search-button {
-    border: 0px solid black;
-    border-bottom-width: 1px;
-    border-right-width: 1px;
-    border-left-width: 2px;
+  border: 0px solid black;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+  border-left-width: 2px;
 }
 
 .new-contact-button {
-    border: none;
-    border-bottom: 1px solid black;
-    border-top-right-radius: 6px;
+  border: none;
+  border-bottom: 1px solid black;
+  border-top-right-radius: 6px;
 }
 
 .search-button:hover,
 .new-contact-button:hover {
-    background-color: rgb(54, 54, 54);
+  background-color: rgb(54, 54, 54);
 }
 
 .search-button-icon {
-    height: 20px;
+  height: 20px;
 }
 
 .new-contact-icon {
-    height: 20px;
+  height: 20px;
 }
 
 .contact-box {
-    display: flex;
-    height: 47rem;
-    max-height: 800px;
-    width: 100%;
-    color: black;
-    background-color: rgb(202, 202, 202);
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
-    
+  display: flex;
+  height: 47rem;
+  max-height: 800px;
+  width: 100%;
+  color: black;
+  background-color: rgb(202, 202, 202);
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
 }
 
 .contact-list {
-    border: none;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    overflow-y: auto;
-    word-wrap: break-word;
-    padding: 0 10px 10px 10px;
+  border: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
+  word-wrap: break-word;
+  padding: 0 10px 10px 10px;
 }
 
 .contact-item {
-    position: relative;
-    padding: 10px;
+  position: relative;
+  padding: 10px;
 }
 
 .contact-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 1.5rem;
-    width: 60px;
-    position: absolute;
-    top: 10px;
-    right: 0;
-    background-color: rgb(202, 202, 202);
-    transition: background 0.3s;
-    font-size: 40px;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.5rem;
+  width: 60px;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  background-color: rgb(202, 202, 202);
+  transition: background 0.3s;
+  font-size: 40px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
 }
 
 .contact-button:hover {
-    background-color: gray;
+  background-color: gray;
 }
 
 .side-bar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: gray;
-    height: 100%;
-    width: 42px;
-    border-left: 1px solid black;
-    border-bottom-right-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: gray;
+  height: 100%;
+  width: 42px;
+  border-left: 1px solid black;
+  border-bottom-right-radius: 6px;
 }
 
 .contact-item {
-    border-bottom: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 .nav-link {
-    font-size: 16px;
-    color: white;
+  font-size: 16px;
+  color: white;
 }
 
 .nav-link:visited {
-    color: white;
+  color: white;
 }
 
 ::-webkit-scrollbar {
-    width: 15px;
+  width: 15px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgb(168, 168, 168);
-    border-radius: 10px;
+  background: rgb(168, 168, 168);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(160, 160, 160);
+  background: rgb(160, 160, 160);
 }
