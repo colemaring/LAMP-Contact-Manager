@@ -49,39 +49,39 @@
                 src="icons/plus-icon.svg"
                 alt="add new contact button" />
             </button>
-            <div class="contact-box">
-              <div class="contact-list"></div>
-              <div class="side-bar">
-                <a class="nav-link" href="#A">A</a>
-                <a class="nav-link" href="">B</a>
-                <a class="nav-link" href="">C</a>
-                <a class="nav-link" href="">D</a>
-                <a class="nav-link" href="">E</a>
-                <a class="nav-link" href="">F</a>
-                <a class="nav-link" href="">G</a>
-                <a class="nav-link" href="">H</a>
-                <a class="nav-link" href="">I</a>
-                <a class="nav-link" href="">J</a>
-                <a class="nav-link" href="">K</a>
-                <a class="nav-link" href="">L</a>
-                <a class="nav-link" href="">M</a>
-                <a class="nav-link" href="">N</a>
-                <a class="nav-link" href="">O</a>
-                <a class="nav-link" href="">P</a>
-                <a class="nav-link" href="">Q</a>
-                <a class="nav-link" href="">R</a>
-                <a class="nav-link" href="">S</a>
-                <a class="nav-link" href="">T</a>
-                <a class="nav-link" href="">U</a>
-                <a class="nav-link" href="">V</a>
-                <a class="nav-link" href="">W</a>
-                <a class="nav-link" href="">X</a>
-                <a class="nav-link" href="">Y</a>
-                <a class="nav-link" href="">Z</a>
-              </div>
-            </div>
+        </div>
+        <div class="contact-box">
+          <div class="contact-list"></div>
+          <div class="side-bar">
+            <a class="nav-link" href="#A">A</a>
+            <a class="nav-link" href="">B</a>
+            <a class="nav-link" href="">C</a>
+            <a class="nav-link" href="">D</a>
+            <a class="nav-link" href="">E</a>
+            <a class="nav-link" href="">F</a>
+            <a class="nav-link" href="">G</a>
+            <a class="nav-link" href="">H</a>
+            <a class="nav-link" href="">I</a>
+            <a class="nav-link" href="">J</a>
+            <a class="nav-link" href="">K</a>
+            <a class="nav-link" href="">L</a>
+            <a class="nav-link" href="">M</a>
+            <a class="nav-link" href="">N</a>
+            <a class="nav-link" href="">O</a>
+            <a class="nav-link" href="">P</a>
+            <a class="nav-link" href="">Q</a>
+            <a class="nav-link" href="">R</a>
+            <a class="nav-link" href="">S</a>
+            <a class="nav-link" href="">T</a>
+            <a class="nav-link" href="">U</a>
+            <a class="nav-link" href="">V</a>
+            <a class="nav-link" href="">W</a>
+            <a class="nav-link" href="">X</a>
+            <a class="nav-link" href="">Y</a>
+            <a class="nav-link" href="">Z</a>
           </div>
         </div>
+      </div>
       </div>
       <script src="main.js"></script>
     </body>
