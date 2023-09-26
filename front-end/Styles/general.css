@@ -1,8 +1,8 @@
 body {
-  font-size: 1.25rem;
-  font-family: Roboto, Arial;
-  background-color: rgb(49, 49, 49) !important;
-  color: rgb(131, 131, 131);
-  padding: 6rem 2rem 0 2rem;
-  margin: 0;
+    font-size: 1.25rem;
+    font-family: Roboto, Arial;
+    background-color: rgb(49, 49, 49);
+    color: white;
+    padding: 6rem 2rem 0 2rem;
+    margin: 0;
 }
