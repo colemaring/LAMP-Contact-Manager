@@ -1,26 +1,16 @@
 <?php
 
-class DataBase {
+function connectDB() {
 
-    private $db = null;
-
-    public function __construct() {
-        try {
-            $this->db = new PDO('mysql:host=localhost;port=3306;dbname=users', 'root', '');
-            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            die('Error: ' . $e->getMessage() . "\n");
-        }
-
-        if ($this->db != null) {
-            echo "Connected to the database.\n";
-        }
-        else {
-            echo "Failed to connect to the database.\n";
-        }
+    $db = null;
+    
+    try {
+        $db = new PDO('mysql:host=localhost;port=3306;dbname=LAMP', 'root', '');
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        die('Error: ' . $e->getMessage() . "\n");
     }
 
-    public function getDataBase() {
-        return $this->db;
-    }
+    return $db;
+    
 }
