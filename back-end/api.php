@@ -4,11 +4,23 @@ require 'database.php';
 // Creates a new user and adds it to the database
 function createUser(Array $data) {
 
+
     $db = connectDB();
 
-    $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
-    $stmt = $db->prepare($sql);
-    $stmt->execute(['username' => $data['username'], 'password' => $data['password']]);
+    // If the user already exists, return an error
+    try {
+        $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
+        $stmt = $db->prepare($sql);
+        $status = $stmt->execute(['username' => $data['username'], 'password' => $data['password']]);
+    }
+
+    catch (PDOException $e) {
+        if ($e->errorInfo[1] == 1062) {
+            return -1;
+        }
+    }
+
+    // Return the user id
     $user_id = $db->lastInsertId();
     
     $db = null;
@@ -22,9 +34,20 @@ function getUser(Array $data) {
     
     $db = connectDB();
 
-    $sql = "SELECT * FROM users WHERE username = :username";
-    $stmt = $db->prepare($sql);
-    $stmt->execute(['username' => $data['username']]);
+    // If the user does not exist, return an error
+    try {
+        $sql = "SELECT * FROM users WHERE username = :username";
+        $stmt = $db->prepare($sql);
+        $status = $stmt->execute(['username' => $data['username']]);
+    }
+
+    catch (PDOException $e) {
+        if ($e->errorInfo[1] == 1062) {
+            return null;
+        }
+    }
+
+    // Return the user
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     $db = null;
