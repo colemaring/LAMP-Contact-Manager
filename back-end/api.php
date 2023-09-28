@@ -6,9 +6,18 @@ function createUser(Array $data) {
 
     $db = connectDB();
 
-    $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
-    $stmt = $db->prepare($sql);
-    $stmt->execute(['username' => $data['username'], 'password' => $data['password']]);
+    try {
+        $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
+        $stmt = $db->prepare($sql);
+        $status = $stmt->execute(['username' => $data['username'], 'password' => $data['password']]);
+    }
+
+    catch (PDOException $e) {
+        if ($e->errorInfo[1] == 1062) {
+            return -1;
+        }
+    }
+
     $user_id = $db->lastInsertId();
     
     $db = null;
@@ -22,9 +31,18 @@ function getUser(Array $data) {
     
     $db = connectDB();
 
-    $sql = "SELECT * FROM users WHERE username = :username";
-    $stmt = $db->prepare($sql);
-    $stmt->execute(['username' => $data['username']]);
+    try {
+        $sql = "SELECT * FROM users WHERE username = :username";
+        $stmt = $db->prepare($sql);
+        $status = $stmt->execute(['username' => $data['username']]);
+    }
+
+    catch (PDOException $e) {
+        if ($e->errorInfo[1] == 1062) {
+            return null;
+        }
+    }
+
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     $db = null;
