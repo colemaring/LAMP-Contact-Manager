@@ -4,8 +4,10 @@ require 'database.php';
 // Creates a new user and adds it to the database
 function createUser(Array $data) {
 
+
     $db = connectDB();
 
+    // If the user already exists, return an error
     try {
         $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
         $stmt = $db->prepare($sql);
@@ -18,6 +20,7 @@ function createUser(Array $data) {
         }
     }
 
+    // Return the user id
     $user_id = $db->lastInsertId();
     
     $db = null;
@@ -31,6 +34,7 @@ function getUser(Array $data) {
     
     $db = connectDB();
 
+    // If the user does not exist, return an error
     try {
         $sql = "SELECT * FROM users WHERE username = :username";
         $stmt = $db->prepare($sql);
@@ -43,6 +47,7 @@ function getUser(Array $data) {
         }
     }
 
+    // Return the user
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     $db = null;
