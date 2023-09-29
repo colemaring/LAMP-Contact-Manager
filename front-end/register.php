@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+
+// If the user is already logged in, redirect to contacts page
+if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
+  header ("Location: contacts.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
   <head>
@@ -117,14 +128,13 @@
           <label for="floatingPassword">Password</label>
         </div>
         <span>Already a user? </span>
-        <a href="index.html">Sign in</a><br /><br />
+        <a href="index.php">Sign in</a><br /><br />
         <a
           class="btn btn-primary w-100 py-2"
           type="submit"
           onclick="handleSignUp();">
           Create account
         </a>
-        Create account
         <p class="mt-5 mb-3 text-body-secondary"></p>
       </form>
     </main>
