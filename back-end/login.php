@@ -18,6 +18,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // If the password is incorrect, return an error
     if (password_verify($data['password'], $user['password'])) {
         http_response_code(200);
+
+        // Create a user session
+        session_start();
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+
         echo json_encode(['user_id' => $user['id']]);
     } else {
         http_response_code(400);

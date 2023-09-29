@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+
+// If the user is already logged in, redirect to contacts page
+if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
+  header ("Location: contacts.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
   <head>
@@ -6,16 +17,15 @@
     <meta name="description" content="" />
     <meta
       name="author"
-      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
-    />
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
     <meta name="generator" content="Hugo 0.115.4" />
     <title>Contact Manager Sign-In</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-      crossorigin="anonymous"
-    />
+      crossorigin="anonymous" />
+    <script src="handlers.js"></script>
 
     <style>
       .bd-placeholder-img {
@@ -97,16 +107,15 @@
   </head>
   <body class="d-flex align-items-center py-4 bg-body-tertiary">
     <main class="form-signin w-100 m-auto">
-      <form>
+      <form method="post" action="">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
         <div class="form-floating">
           <input
             type="username"
             class="form-control"
-            id="floatingInput"
-            placeholder="name@example.com"
-          />
+            id="floatingUsername"
+            placeholder="name@example.com" />
           <label for="floatingInput">Username</label>
         </div>
         <div class="form-floating">
@@ -114,8 +123,7 @@
             type="password"
             class="form-control"
             id="floatingPassword"
-            placeholder="Password"
-          />
+            placeholder="Password" />
           <label for="floatingPassword">Password</label>
         </div>
 
@@ -124,32 +132,31 @@
             class="form-check-input"
             type="checkbox"
             value="remember-me"
-            id="flexCheckDefault"
-          />
+            id="flexCheckDefault" />
           <label class="form-check-label" for="flexCheckDefault">
             Remember me
           </label>
         </div>
 
         <span>Not a user?</span>
-        <a href="register.html">Register here</a><br /><br />
-
-        <button class="btn btn-primary w-100 py-2" type="submit">
+        <a href="register.php">Register here</a><br /><br />
+        <a
+          class="btn btn-primary w-100 py-2"
+          type="submit"
+          onclick="handleLogin();">
           Sign in
-        </button>
+        </a>
         <p class="mt-5 mb-3 text-body-secondary"></p>
       </form>
     </main>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
       integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </body>
 </html>
