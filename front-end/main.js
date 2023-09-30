@@ -139,7 +139,7 @@ function displayContactList() {
         '</div><div class="dropdown"><button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Modify</button>' +
         '<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"><li><button class="dropdown-item" type="button" id="update' +
         i +
-        '" onclick="updateContact()">Update</button></li>' +
+        '" >Update</button></li>' +
         '<li><button class="dropdown-item" id="delete' +
         i +
         '">Delete</button></li></ul></div></div></div>'
@@ -161,6 +161,16 @@ function displayContactList() {
       $("#modalDelete").modal("toggle");
 
       // Update contact to delete
+      contactId = this.id;
+    };
+
+    let updateButton = document.getElementById("update" + i);
+
+    updateButton.onclick = function () {
+      // Display update dialog
+      $("#modalUpdate").modal("toggle");
+
+      // Update contact to update
       contactId = this.id;
     };
   }

@@ -86,6 +86,98 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
           </div>
         </div>
       </div>
+      <!-- update contact modal -->
+      <div
+        class="modal fade"
+        id="modalUpdate"
+        tabindex="-1"
+        aria-labelledby="modalLabel"
+        aria-hidden="true"
+        style="color: black">
+        <div class="modal-dialog">
+          <div class="modal-content bg-dark">
+            <div class="modal-header">
+              <div
+                class="modal-title fw-bold ps-1"
+                id="modalLabel"
+                style="color: white; font-size: 2rem">
+                Update this contact
+              </div>
+              <button
+                type="button"
+                class="btn-close btn-close-white"
+                data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- create contact form-->
+              <form id="new-contact-form" class="form" method="POST" novalidate>
+                <div class="mb-2">
+                  <div class="input-group">
+                    <div class="form-floating p-1">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="firstName"
+                        placeholder="First Name"
+                        name="firstName"
+                        required />
+                      <label for="firstName">First Name</label>
+                      <div class="invalid-feedback">Please enter a name.</div>
+                    </div>
+                    <div class="form-floating p-1">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="lastName"
+                        placeholder="Last Name"
+                        name="lastName"
+                        required />
+                      <label for="lastName">Last Name</label>
+                      <div class="invalid-feedback">Please enter a name.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <div class="form-floating p-1">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      placeholder="Email"
+                      name="email"
+                      required />
+                    <label for="email">Email</label>
+                    <div class="invalid-feedback">
+                      Please enter a valid email.
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <div class="form-floating p-1">
+                    <input
+                      type="tel"
+                      class="form-control"
+                      id="phoneNumber"
+                      placeholder="Phone Number"
+                      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                      name="phone"
+                      required />
+                    <label for="phoneNumber">Phone Number (123-456-7890)</label>
+                    <div class="invalid-feedback">Format: (123-456-7890)</div>
+                  </div>
+                </div>
+                <!--<input type="date" id="date" name="dateCreated" hidden>-->
+                <button
+                  type="submit"
+                  class="btn btn-primary mt-2 d-inline-flex w-100 justify-content-center">
+                  Save
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- create contact modal -->
       <div
         class="modal fade"
