@@ -68,7 +68,9 @@ async function handleLogin() {
 
 async function handleLogOut() {
   // Send request to logout
-  let data = await fetch("http://localhost:8080/back-end/logout.php?logout=true");
+  let data = await fetch(
+    "http://localhost:8080/back-end/logout.php?logout=true"
+  );
 
   if (data.status == 200) {
     // Redirect to login page
@@ -77,5 +79,39 @@ async function handleLogOut() {
   } else {
     // Display error message
     alert("Error logging out.");
+  }
+}
+
+async function handleCreateContact() {
+  let firstname = document.getElementById("firstname").value;
+  let lastname = document.getElementById("lastname").value;
+  let email = document.getElementById("email").value;
+  let phone = document.getElementById("phone").value;
+
+  // Send request to add contact
+  let data = await fetch("http://localhost:8080/back-end/contacts.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+    body: JSON.stringify({
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      phone: phone,
+      datecreated: new Date().toISOString().slice(0, 10),
+    }),
+  });
+
+  if (data.status == 201) {
+    // Redirect to contacts page
+    window.location.href = "http://localhost:8080/front-end/contacts.php";
+    alert("Added contact successfully");
+  } else {
+    // Display error message
+    alert("Error adding contact.");
   }
 }
