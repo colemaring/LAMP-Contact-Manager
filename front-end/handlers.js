@@ -111,7 +111,7 @@ async function handleCreateContact() {
   if (data.status == 201) {
     // Redirect to contacts page
     window.location.href = "http://localhost:8080/front-end/contacts.php";
-    alert("Added contact successfully");
+    alert(data["message"]);
   } else {
     // Display error message
     alert(data["message"]);
