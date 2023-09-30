@@ -23,7 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     session_start();
 
-    $contact_id = createContact($_SESSION['user_id'], $data);
+    $data['id'] = $_SESSION['user_id'];
+
+    $contact_id = createContact($data);
 
     if ($contact_id == -1) {
         http_response_code(409);

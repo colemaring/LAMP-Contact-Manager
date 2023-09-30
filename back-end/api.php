@@ -56,14 +56,14 @@ function getUser(Array $data) {
 
 }
 
-function createContact($id, Array $data) {
+function createContact(Array $data) {
 
     $db = connectDB();
 
     try {
         $sql = "INSERT INTO contacts (id, firstname, lastname, email, phone, datecreated) VALUES (:id, :firstname, :lastname, :email, :phone, :datecreated)";
         $stmt = $db->prepare($sql);
-        $stmt->execute(['id' => $id, 'firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email'], 'phone' => $data['phone'], 'datecreated' => $data['datecreated']]);
+        $stmt->execute(['id' => $data['id'], 'firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email'], 'phone' => $data['phone'], 'datecreated' => $data['datecreated']]);
     }
     
     catch (PDOException $e) {
