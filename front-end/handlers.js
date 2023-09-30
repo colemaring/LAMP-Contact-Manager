@@ -89,7 +89,7 @@ async function handleCreateContact() {
   let phone = document.getElementById("phone").value;
 
   // Send request to add contact
-  let data = await fetch("http://localhost:8080/back-end/contacts.php", {
+  let response = await fetch("http://localhost:8080/back-end/contacts.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -106,12 +106,14 @@ async function handleCreateContact() {
     }),
   });
 
+  let data = await response.json();
+
   if (data.status == 201) {
     // Redirect to contacts page
     window.location.href = "http://localhost:8080/front-end/contacts.php";
     alert("Added contact successfully");
   } else {
     // Display error message
-    alert("Error adding contact.");
+    alert(data["message"]);
   }
 }
