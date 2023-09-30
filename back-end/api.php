@@ -60,9 +60,18 @@ function createContact(Array $data) {
 
     $db = connectDB();
 
-    $sql = "INSERT INTO contacts (id, firstname, lastname, email, phone, record) VALUES (:id, :firstname, :lastname, :email, :phone, :record)";
-    $stmt = $db->prepare($sql);
-    $stmt->execute(['id' => $data['id'], 'firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email'], 'phone' => $data['phone'], 'record' => $data['record']]);
+    try {
+        $sql = "INSERT INTO contacts (id, firstname, lastname, email, phone, datecreated) VALUES (:id, :firstname, :lastname, :email, :phone, :datecreated)";
+        $stmt = $db->prepare($sql);
+        $stmt->execute(['id' => $data['id'], 'firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email'], 'phone' => $data['phone'], 'datecreated' => $data['datecreated']]);
+    }
+    
+    catch (PDOException $e) {
+        if ($e->errorInfo[1] == 1062) {
+            return -1;
+        }
+    }
+    
     $contact_id = $db->lastInsertId();
 
     $db = null;
