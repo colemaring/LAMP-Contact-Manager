@@ -7,7 +7,7 @@ function createUser(Array $data) {
 
     $db = connectDB();
 
-    // If the user already exists, return an error
+    // If a user with the same username already exists, return an error
     try {
         $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
         $stmt = $db->prepare($sql);
@@ -56,10 +56,12 @@ function getUser(Array $data) {
 
 }
 
+// Creates a new contact and adds it to the database
 function createContact(Array $data) {
 
     $db = connectDB();
 
+    // If a contact with the same phone number already exists, return an error
     try {
         $sql = "INSERT INTO contacts (id, firstname, lastname, email, phone, datecreated) VALUES (:id, :firstname, :lastname, :email, :phone, :datecreated)";
         $stmt = $db->prepare($sql);
@@ -72,6 +74,7 @@ function createContact(Array $data) {
         }
     }
     
+    // Return the contact id
     $contact_id = $db->lastInsertId();
 
     $db = null;

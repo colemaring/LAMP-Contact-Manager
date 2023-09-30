@@ -112,7 +112,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
             </div>
             <div class="modal-body">
               <!-- create contact form-->
-              <form id="new-contact-form" class="form" method="POST" novalidate>
+              <form id="new-contact-form" class="updateForm" method="POST" novalidate>
                 <div class="mb-2">
                   <div class="input-group">
                     <div class="form-floating p-1">
@@ -204,7 +204,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
             </div>
             <div class="modal-body">
               <!-- create contact form-->
-              <form id="new-contact-form" class="form" method="POST" novalidate>
+              <form id="new-contact-form" class="createForm" method="POST" novalidate>
                 <div class="mb-2">
                   <div class="input-group">
                     <div class="form-floating p-1">
