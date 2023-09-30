@@ -17,7 +17,6 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
 <html>
   <html lang="en">
     <head>
-      <script src="handlers.js"></script>
       <!-- Meta tags -->
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -53,7 +52,9 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
         <div class="title">Contact Manager</div>
         <div class="logout-container">
           <div class="logout-button-container">
-            <button class="logout-button" onclick="handleLogOut();">Log out</button>
+            <button class="logout-button" onclick="handleLogOut();">
+              Log out
+            </button>
           </div>
         </div>
       </div>
@@ -118,7 +119,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                       <input
                         type="text"
                         class="form-control"
-                        id="firstName"
+                        id="firstname"
                         placeholder="First Name"
                         name="firstName"
                         required />
@@ -129,7 +130,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                       <input
                         type="text"
                         class="form-control"
-                        id="lastName"
+                        id="lastname"
                         placeholder="Last Name"
                         name="lastName"
                         required />
@@ -158,7 +159,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                     <input
                       type="tel"
                       class="form-control"
-                      id="phoneNumber"
+                      id="phone"
                       placeholder="Phone Number"
                       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                       name="phone"
@@ -210,7 +211,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                       <input
                         type="text"
                         class="form-control"
-                        id="firstName"
+                        id="createFirstName"
                         placeholder="First Name"
                         name="firstName"
                         required />
@@ -221,7 +222,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                       <input
                         type="text"
                         class="form-control"
-                        id="lastName"
+                        id="createLastName"
                         placeholder="Last Name"
                         name="lastName"
                         required />
@@ -235,7 +236,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                     <input
                       type="email"
                       class="form-control"
-                      id="email"
+                      id="createEmail"
                       placeholder="Email"
                       name="email"
                       required />
@@ -250,7 +251,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                     <input
                       type="tel"
                       class="form-control"
-                      id="phoneNumber"
+                      id="createPhone"
                       placeholder="Phone Number"
                       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                       name="phone"
@@ -261,6 +262,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                 </div>
                 <!--<input type="date" id="date" name="dateCreated" hidden>-->
                 <button
+                  onclick="handleCreateContact();"
                   type="submit"
                   class="btn btn-primary mt-2 d-inline-flex w-100 justify-content-center">
                   Submit
@@ -319,6 +321,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
         crossorigin="anonymous"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
       <script src="main.js"></script>
+      <script src="handlers.js" defer></script>
     </body>
   </html>
 </html>
