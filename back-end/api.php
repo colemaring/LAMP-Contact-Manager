@@ -7,7 +7,7 @@ function createUser(Array $data) {
 
     $db = connectDB();
 
-    // If the user already exists, return an error
+    // If a user with the same username already exists, return an error
     try {
         $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
         $stmt = $db->prepare($sql);
@@ -56,10 +56,12 @@ function getUser(Array $data) {
 
 }
 
+// Creates a new contact and adds it to the database
 function createContact(Array $data) {
 
     $db = connectDB();
 
+    // If a contact with the same phone number already exists, return an error
     try {
         $sql = "INSERT INTO contacts (id, firstname, lastname, email, phone, datecreated) VALUES (:id, :firstname, :lastname, :email, :phone, :datecreated)";
         $stmt = $db->prepare($sql);
@@ -72,6 +74,7 @@ function createContact(Array $data) {
         }
     }
     
+    // Return the contact id
     $contact_id = $db->lastInsertId();
 
     $db = null;
@@ -87,6 +90,7 @@ function updateContact(Array $data, $contact_id) {
     $sql = "UPDATE contacts SET firstname = :firstname, lastname = :lastname, email = :email, phone = :phone, WHERE contact_id = :contact_id";
     $stmt = $db->prepare($sql);
     $stmt->execute(['firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email'], 'phone' => $data['phone']]);
+    
     $row = $stmt->rowCount();
 
     $db = null;
@@ -102,6 +106,7 @@ function deleteContact($contact_id) {
     $sql = "DELETE FROM contacts WHERE contact_id = :contact_id";
     $stmt = $this->db->prepare($sql);
     $stmt->execute(['contact_id' => $contact_id]);
+    
     $row = $stmt->rowCount();
 
     $db = null;
@@ -113,9 +118,18 @@ function getContacts($id) {
     
     $db = connectDB();
 
-    $sql = "SELECT * FROM contacts WHERE id = :id";
-    $stmt = $this->db->prepare($sql);
-    $stmt->execute(['id' => $id]);
+    try {
+        $sql = "SELECT * FROM contacts WHERE id = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->execute(['id' => $id]);
+    } 
+    
+    catch (PDOException $e) {
+        if ($e->errorInfo[1] == 1062) {
+            return null;
+        }
+    }
+
     $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $db = null;

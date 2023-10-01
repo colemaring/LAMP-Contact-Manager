@@ -41,19 +41,34 @@ let contacts = [
   },
 ];
 
-// Form validation
-const form = document.querySelector("form");
-form.addEventListener("submit", (e) => {
+// Update form validation
+const updateForm = document.querySelector(".updateForm");
+updateForm.addEventListener("submit", (e) => {
   // Stops form from submitting on incorrect input
-  if (!form.checkValidity()) {
+  if (!updateForm.checkValidity()) {
     e.preventDefault();
   }
   // Toggles form modal
   else {
-    $("#modal").modal("toggle");
+    $("#modalUpdate").modal("toggle");
   }
 
-  form.classList.add("was-validated");
+  updateForm.classList.add("was-validated");
+});
+
+// Create form validation
+const createForm = document.querySelector(".createForm");
+createForm.addEventListener("submit", (e) => {
+  // Stops form from submitting on incorrect input
+  if (!createForm.checkValidity()) {
+    e.preventDefault();
+  }
+  // Toggles form modal
+  else {
+    $("#modalCreate").modal("toggle");
+  }
+
+  createForm.classList.add("was-validated");
 });
 
 // Displays a new contact list when a new character is entered
@@ -209,32 +224,4 @@ function updateContactForm(contact) {
   // Update contact attributes
 
   return true;
-}
-
-async function handleSignUp() {
-  let firstName = document.getElementById("firstName").value;
-  let lastName = document.getElementById("lastName").value;
-
-  // Send request to create new user
-  let data = await fetch("http://localhost:8080/back-end/signup.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
-    },
-    body: JSON.stringify({
-      firstName: firstName,
-      lastName: lastName,
-    }),
-  });
-
-  if (data.status == 200) {
-    // Redirect to login page
-    window.location.href = "http://localhost:8080/front-end/index.html";
-  } else {
-    // Display error message
-    alert("Error signing up. Please try again.");
-  }
 }
