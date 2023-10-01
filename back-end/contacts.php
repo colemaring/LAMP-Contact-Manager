@@ -52,3 +52,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     http_response_code(200);
     echo json_encode($contacts);
 }
+
+if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+
+    $contact_id = deleteContact($_GET['phone']);
+
+    if ($contact_id == 0) {
+        http_response_code(404);
+        echo json_encode(['message' => 'Contact not found.']);
+        return;
+    }
+
+    http_response_code(200);
+    echo json_encode(['message' => 'Contact deleted successfully.']);
+}

@@ -304,6 +304,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                   No
                 </button>
                 <button
+                  onclick="handleDeleteContact();"
                   class="btn btn-success form-control"
                   id="confirmDelete"
                   aria-label="Yes button">

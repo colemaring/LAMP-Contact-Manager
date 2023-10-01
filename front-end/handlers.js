@@ -28,6 +28,78 @@ createForm.addEventListener("submit", (e) => {
   createForm.classList.add("was-validated");
 });
 
+async function displayContactList() {
+
+  // Get contacts
+  let contacts = await handleGetContact();
+
+  // No new contacts to display
+  if (contacts == null) return;
+  
+  if (contacts.length == numOfDisplayedContacts) return;
+
+  // Create html components for contacts and set with corrensponding data
+  for (let i = numOfDisplayedContacts; i < contacts.length; i++) {
+    // Appends a new contact with a bootstrap dropdown menu to the contact list.
+    // Each update and delete button is given an id that that corresponds to its
+    // function and its associated contacts array index. Ex. "update0" or
+    // "delete0" and contact data is found at contacts[0]
+    $("#contact-list").append(
+      '<div class="contact-item"> <div class="contact-info"> <div style="word-wrap: break-word;">' +
+        "<div><b>Name:</b><span> " +
+        contacts[i]["firstname"] +
+        " " +
+        contacts[i]["lastname"] +
+        "</span></div> <div><b>Email:</b> <span>" +
+        contacts[i]["email"] +
+        "</span></div>" +
+        "<div><b>Phone Number:</b> <span>" +
+        contacts[i]["phone"] +
+        "</span></div>" +
+        '</div><div class="dropdown"><button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Modify</button>' +
+        '<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"><li><button class="dropdown-item" type="button" id="update' +
+        i +
+        '" >Update</button></li>' +
+        '<li><button class="dropdown-item" id="delete' +
+        i +
+        '">Delete</button></li></ul></div></div></div>'
+    );
+
+    // Sets the functionality of the delete button on a contact item
+    let deleteButton = document.getElementById("delete" + i);
+
+    deleteButton.onclick = function () {
+      // Display confirmation dialog
+      $("#modalDelete").modal("toggle");
+
+      // Update contact to delete
+      contactId = this.id;
+    };
+
+    let updateButton = document.getElementById("update" + i);
+
+    updateButton.onclick = function () {
+      // Display update dialog
+      $("#modalUpdate").modal("toggle");
+
+      // Update contact to update
+      contactId = this.id;
+    };
+  }
+
+  // Update number of contacts displayed
+  numOfDisplayedContacts = contacts.length;
+}
+
+let contactId = 0;
+
+// Deletes contact on user confirmation
+document.getElementById("confirmDelete").onclick = function () {
+  // Close dialog
+  $("#modalDelete").modal("toggle");
+  handleDeleteContact();
+};
+
 async function handleSignUp() {
   let username = document.getElementById("floatingUsername").value;
   let password = document.getElementById("floatingPassword").value;
@@ -161,64 +233,38 @@ async function handleGetContact() {
   }
 }
 
-let numOfDisplayedContacts = 0;
-displayContactList();
+async function handleDeleteContact() {
 
-async function displayContactList() {
+  // Get contacts
   let contacts = await handleGetContact();
 
-  // No new contacts to display
-  if (contacts.length == numOfDisplayedContacts) return;
+  // Get contact from last char of id
+  let phone = contacts[contactId.slice(-1)]["phone"];
+  console.log(phone);
 
-  // Create html components for contacts and set with corrensponding data
-  for (let i = numOfDisplayedContacts; i < contacts.length; i++) {
-    // Appends a new contact with a bootstrap dropdown menu to the contact list.
-    // Each update and delete button is given an id that that corresponds to its
-    // function and its associated contacts array index. Ex. "update0" or
-    // "delete0" and contact data is found at contacts[0]
-    $("#contact-list").append(
-      '<div class="contact-item"> <div class="contact-info"> <div style="word-wrap: break-word;">' +
-        "<div><b>Name:</b><span> " +
-        contacts[i]["firstname"] +
-        " " +
-        contacts[i]["lastname"] +
-        "</span></div> <div><b>Email:</b> <span>" +
-        contacts[i]["email"] +
-        "</span></div>" +
-        "<div><b>Phone Number:</b> <span>" +
-        contacts[i]["phone"] +
-        "</span></div>" +
-        '</div><div class="dropdown"><button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Modify</button>' +
-        '<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"><li><button class="dropdown-item" type="button" id="update' +
-        i +
-        '" >Update</button></li>' +
-        '<li><button class="dropdown-item" id="delete' +
-        i +
-        '">Delete</button></li></ul></div></div></div>'
-    );
+  // Send delete contact request
+  let response = await fetch(
+    "http://localhost:8080/back-end/contacts.php?phone=" + phone,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "DELETE",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+    }
+  );
 
-    // Sets the functionality of the delete button on a contact item
-    let deleteButton = document.getElementById("delete" + i);
-
-    deleteButton.onclick = function () {
-      // Display confirmation dialog
-      $("#modalDelete").modal("toggle");
-
-      // Update contact to delete
-      contactId = this.id;
-    };
-
-    let updateButton = document.getElementById("update" + i);
-
-    updateButton.onclick = function () {
-      // Display update dialog
-      $("#modalUpdate").modal("toggle");
-
-      // Update contact to update
-      contactId = this.id;
-    };
+  if (response.status == 200) {
+    // Redirect to contacts page
+    window.location.href = "http://localhost:8080/front-end/contacts.php";
+    console.log("Contact deleted successfully");
+  } else {
+    // Display error message
+    alert("Error deleting contact.");
   }
-
-  // Update number of contacts displayed
-  numOfDisplayedContacts = contacts.length;
 }
+
+let numOfDisplayedContacts = 0;
+displayContactList();
