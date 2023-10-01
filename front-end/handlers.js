@@ -117,3 +117,15 @@ async function handleCreateContact() {
     alert(data["message"]);
   }
 }
+
+async function handleGetContact() {
+  let response = await fetch("http://localhost:8080/back-end/contacts.php");
+
+  let data = await response.json();
+
+  if (data.status == 200) {
+    return data["contacts"];
+  } else {
+    return null;
+  }
+}

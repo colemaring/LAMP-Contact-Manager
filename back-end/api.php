@@ -90,6 +90,7 @@ function updateContact(Array $data, $contact_id) {
     $sql = "UPDATE contacts SET firstname = :firstname, lastname = :lastname, email = :email, phone = :phone, WHERE contact_id = :contact_id";
     $stmt = $db->prepare($sql);
     $stmt->execute(['firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email'], 'phone' => $data['phone']]);
+    
     $row = $stmt->rowCount();
 
     $db = null;
@@ -105,6 +106,7 @@ function deleteContact($contact_id) {
     $sql = "DELETE FROM contacts WHERE contact_id = :contact_id";
     $stmt = $this->db->prepare($sql);
     $stmt->execute(['contact_id' => $contact_id]);
+    
     $row = $stmt->rowCount();
 
     $db = null;
@@ -116,9 +118,18 @@ function getContacts($id) {
     
     $db = connectDB();
 
-    $sql = "SELECT * FROM contacts WHERE id = :id";
-    $stmt = $this->db->prepare($sql);
-    $stmt->execute(['id' => $id]);
+    try {
+        $sql = "SELECT * FROM contacts WHERE id = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->execute(['id' => $id]);
+    } 
+    
+    catch (PDOException $e) {
+        if ($e->errorInfo[1] == 1062) {
+            return null;
+        }
+    }
+
     $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $db = null;
