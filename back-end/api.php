@@ -99,14 +99,25 @@ function updateContact(Array $data, $contact_id) {
 
 }
 
-function deleteContact($contact_id) {
+// Deletes a contact from the database
+function deleteContact($phone) {
 
     $db = connectDB();
 
-    $sql = "DELETE FROM contacts WHERE contact_id = :contact_id";
-    $stmt = $this->db->prepare($sql);
-    $stmt->execute(['contact_id' => $contact_id]);
+    // If the contact does not exist, return an error
+    try {
+        $sql = "DELETE FROM contacts WHERE phone = :phone";
+        $stmt = $db->prepare($sql);
+        $stmt->execute(['phone' => $phone]);
+    }
+
+    catch (PDOException $e) {
+        if ($e->errorInfo[1] == 1062) {
+            return 0;
+        }
+    }
     
+    // Return the number of rows affected
     $row = $stmt->rowCount();
 
     $db = null;
@@ -114,10 +125,12 @@ function deleteContact($contact_id) {
     return $row;
 }
 
+// Grabs all contacts from a user from the database
 function getContacts($id) {
     
     $db = connectDB();
 
+    // If a user didn't create a contact, return an error
     try {
         $sql = "SELECT * FROM contacts WHERE id = :id";
         $stmt = $db->prepare($sql);
@@ -130,6 +143,7 @@ function getContacts($id) {
         }
     }
 
+    // Return the contacts
     $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $db = null;
