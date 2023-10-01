@@ -320,7 +320,6 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-      <script src="main.js"></script>
       <script src="handlers.js" defer></script>
     </body>
   </html>
