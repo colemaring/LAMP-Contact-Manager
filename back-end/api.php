@@ -88,7 +88,7 @@ function updateContact($contact_id, Array $data) {
     $db = connectDB();
 
     try {
-        $sql = "UPDATE contacts SET firstname = :firstname, lastname = :lastname, email = :email, phone = :phone, WHERE contact_id = :contact_id";
+        $sql = "UPDATE contacts SET firstname = :firstname, lastname = :lastname, email = :email, phone = :phone WHERE contact_id = :contact_id";
         $stmt = $db->prepare($sql);
         $stmt->execute(['firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email'], 'phone' => $data['phone'], 'contact_id' => $contact_id]);
     }

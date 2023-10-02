@@ -263,5 +263,56 @@ async function handleDeleteContact() {
   }
 }
 
+async function handleUpdateContact() {
+  // Get contacts
+  let contacts = await handleGetContact();
+
+  // Get contact from last char of id
+  let contact_id = contacts[contactId.slice(-1)]["contact_id"];
+
+  let firstname = document.getElementById("updateFirstName").value;
+  let lastname = document.getElementById("updateLastName").value;
+  let email = document.getElementById("updateEmail").value;
+  let phone = document.getElementById("updatePhone").value;
+
+  // Send update contact request
+  let response = await fetch(
+    "http://localhost:8080/back-end/contacts.php?contact_id=" + contact_id,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "PUT",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+      body: JSON.stringify({
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        phone: phone,
+      }),
+    }
+  );
+
+  if (response.status == 200) {
+    // Redirect to contacts page
+    window.location.href = "http://localhost:8080/front-end/contacts.php";
+    console.log("Contact updated successfully");
+  } else {
+    // Display error message
+    alert("Error updating contact.");
+  }
+}
+
+console.log("DEEZ");
+
+// document.getElementById("updateContactButton").onclick = function () {
+//   console.log("OK");
+//   // Close dialog
+//   $("#modalUpdate").modal("toggle");
+//   handleUpdateContact();
+// };
+
 let numOfDisplayedContacts = 0;
 displayContactList();
