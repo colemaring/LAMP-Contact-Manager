@@ -1,6 +1,6 @@
 let contactId = 0;
 let search = "";
-displayContactList("");
+displayContactList(search);
 
 // Update form validation
 const updateForm = document.querySelector(".updateForm");
@@ -39,12 +39,10 @@ async function displayContactList(search) {
   if (search == "") {
     // Clear contact list
     $("#contact-list").empty();
-    contactId = 0;
     contacts = await handleGetContact(search);
   } else {
     // Clear contact list
     $("#contact-list").empty();
-    contactId = 0;
     contacts = await handleSearchContact(search);
   }
 
@@ -238,7 +236,7 @@ async function handleUpdateContact() {
   }
 }
 
-document.getElementById("search-bar").onchange = async function () {
+document.getElementById("search-bar").oninput = async function () {
   search = document.getElementById("search-bar").value;
   // Display search results
   displayContactList(search);
