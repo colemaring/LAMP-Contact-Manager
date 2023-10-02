@@ -29,13 +29,12 @@ createForm.addEventListener("submit", (e) => {
 });
 
 async function displayContactList() {
-
   // Get contacts
   let contacts = await handleGetContact();
 
   // No new contacts to display
   if (contacts == null) return;
-  
+
   if (contacts.length == numOfDisplayedContacts) return;
 
   // Create html components for contacts and set with corrensponding data
@@ -234,17 +233,15 @@ async function handleGetContact() {
 }
 
 async function handleDeleteContact() {
-
   // Get contacts
   let contacts = await handleGetContact();
 
   // Get contact from last char of id
-  let phone = contacts[contactId.slice(-1)]["phone"];
-  console.log(phone);
+  let contact_id = contacts[contactId.slice(-1)]["contact_id"];
 
   // Send delete contact request
   let response = await fetch(
-    "http://localhost:8080/back-end/contacts.php?phone=" + phone,
+    "http://localhost:8080/back-end/contacts.php?contact_id=" + contact_id,
     {
       method: "DELETE",
       headers: {

@@ -7,7 +7,9 @@ function connectDB() {
     try {
         $db = new PDO('mysql:host=localhost;port=3306;dbname=LAMP', 'root', '');
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
+    } 
+    
+    catch (PDOException $e) {
         die('Error: ' . $e->getMessage() . "\n");
     }
 

@@ -83,32 +83,39 @@ function createContact(Array $data) {
     
 }
 
-function updateContact(Array $data, $contact_id) {
+function updateContact($contact_id, Array $data) {
     
     $db = connectDB();
 
-    $sql = "UPDATE contacts SET firstname = :firstname, lastname = :lastname, email = :email, phone = :phone, WHERE contact_id = :contact_id";
-    $stmt = $db->prepare($sql);
-    $stmt->execute(['firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email'], 'phone' => $data['phone']]);
+    try {
+        $sql = "UPDATE contacts SET firstname = :firstname, lastname = :lastname, email = :email, phone = :phone, WHERE contact_id = :contact_id";
+        $stmt = $db->prepare($sql);
+        $stmt->execute(['firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email'], 'phone' => $data['phone'], 'contact_id' => $contact_id]);
+    }
     
+    catch (PDOException $e) {
+        if ($e->errorInfo[1] == 1062) {
+            return 0;
+        }
+    }
+
     $row = $stmt->rowCount();
 
     $db = null;
 
     return $row;
-
 }
 
 // Deletes a contact from the database
-function deleteContact($phone) {
+function deleteContact($contact_id) {
 
     $db = connectDB();
 
     // If the contact does not exist, return an error
     try {
-        $sql = "DELETE FROM contacts WHERE phone = :phone";
+        $sql = "DELETE FROM contacts WHERE contact_id = :contact_id";
         $stmt = $db->prepare($sql);
-        $stmt->execute(['phone' => $phone]);
+        $stmt->execute(['contact_id' => $contact_id]);
     }
 
     catch (PDOException $e) {
