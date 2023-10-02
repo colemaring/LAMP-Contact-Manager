@@ -25,7 +25,6 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
       rel="stylesheet"
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous" />
-    <script src="handlers.js"></script>
 
     <style>
       .bd-placeholder-img {
@@ -132,7 +131,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
         <button
           id="signupButton"
           class="btn btn-primary w-100 py-2"
-          type="submit"
+          type="button"
           onclick="handleSignUp();">
           Create account
         </button>
@@ -148,5 +147,6 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
       integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
       crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="userScripts.js" defer></script>
   </body>
 </html>

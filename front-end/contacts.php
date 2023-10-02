@@ -51,7 +51,10 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
         <div class="title">Contact Manager</div>
         <div class="logout-container">
           <div class="logout-button-container">
-            <button id="logoutButton" class="logout-button" onclick="handleLogOut()">
+            <button
+              id="logoutButton"
+              class="logout-button"
+              onclick="handleLogOut()">
               Log out
             </button>
           </div>
@@ -331,7 +334,8 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-      <script src="handlers.js" defer></script>
+      <script src="crudScripts.js" defer></script>
+      <script src="userScripts.js" defer></script>
     </body>
   </html>
 </html>
