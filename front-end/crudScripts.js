@@ -164,8 +164,18 @@ async function handleSearchContact(search) {
 }
 
 async function handleDeleteContact() {
+  let contacts = [];
+
   // Get contacts
-  let contacts = await handleGetContact();
+  if (search == "") {
+    // Clear contact list
+    $("#contact-list").empty();
+    contacts = await handleGetContact(search);
+  } else {
+    // Clear contact list
+    $("#contact-list").empty();
+    contacts = await handleSearchContact(search);
+  }
 
   // Get contact from last char of id
   let contact_id = contacts[contactId.slice(-1)]["contact_id"];
@@ -195,8 +205,18 @@ async function handleDeleteContact() {
 }
 
 async function handleUpdateContact() {
+  let contacts = [];
+
   // Get contacts
-  let contacts = await handleGetContact();
+  if (search == "") {
+    // Clear contact list
+    $("#contact-list").empty();
+    contacts = await handleGetContact(search);
+  } else {
+    // Clear contact list
+    $("#contact-list").empty();
+    contacts = await handleSearchContact(search);
+  }
 
   // Get contact from last char of id
   let contact_id = contacts[contactId.slice(-1)]["contact_id"];
