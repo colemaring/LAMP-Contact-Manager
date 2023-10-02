@@ -1,3 +1,7 @@
+let contactId = 0;
+let numOfDisplayedContacts = 0;
+displayContactList();
+
 // Update form validation
 const updateForm = document.querySelector(".updateForm");
 updateForm.addEventListener("submit", (e) => {
@@ -89,15 +93,6 @@ async function displayContactList() {
   // Update number of contacts displayed
   numOfDisplayedContacts = contacts.length;
 }
-
-let contactId = 0;
-
-// Deletes contact on user confirmation
-document.getElementById("confirmDelete").onclick = function () {
-  // Close dialog
-  $("#modalDelete").modal("toggle");
-  handleDeleteContact();
-};
 
 async function handleSignUp() {
   let username = document.getElementById("floatingUsername").value;
@@ -304,15 +299,3 @@ async function handleUpdateContact() {
     alert("Error updating contact.");
   }
 }
-
-console.log("DEEZ");
-
-// document.getElementById("updateContactButton").onclick = function () {
-//   console.log("OK");
-//   // Close dialog
-//   $("#modalUpdate").modal("toggle");
-//   handleUpdateContact();
-// };
-
-let numOfDisplayedContacts = 0;
-displayContactList();

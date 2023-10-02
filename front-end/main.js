@@ -49,27 +49,3 @@ function fetchContacts() {
 
   return contacts;
 }
-
-// Send a request to delete contact
-function deleteContact() {
-  // Get contact from last char of id and turn it into JSON
-  let contactToDelete = JSON.stringify(contacts[contactId.slice(-1)]);
-
-  // Send delete contact request
-
-  // Reset contact to be deleted
-  contactId = null;
-}
-
-// Send a request to update contact
-function updateContact(contact) {}
-
-// Displays a form where user can update contact info.
-// Returns true when contact was changed successfully. Returns false when contact update was cancelled.
-function updateContactForm(contact) {
-  // Display form to update contacts
-
-  // Update contact attributes
-
-  return true;
-}

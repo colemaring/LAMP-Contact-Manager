@@ -51,7 +51,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
         <div class="title">Contact Manager</div>
         <div class="logout-container">
           <div class="logout-button-container">
-            <button class="logout-button" onclick="handleLogOut();">
+            <button id="logoutButton" class="logout-button" onclick="handleLogOut()">
               Log out
             </button>
           </div>
@@ -111,14 +111,18 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
             </div>
             <div class="modal-body">
               <!-- update contact form-->
-              <form id="new-contact-form" class="updateForm" method="POST" novalidate>
+              <form
+                id="new-contact-form"
+                class="updateForm"
+                method="POST"
+                novalidate>
                 <div class="mb-2">
                   <div class="input-group">
                     <div class="form-floating p-1">
                       <input
                         type="text"
                         class="form-control"
-                        id="firstname"
+                        id="updateFirstName"
                         placeholder="First Name"
                         name="firstName"
                         required />
@@ -129,7 +133,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                       <input
                         type="text"
                         class="form-control"
-                        id="lastname"
+                        id="updateLastName"
                         placeholder="Last Name"
                         name="lastName"
                         required />
@@ -143,7 +147,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                     <input
                       type="email"
                       class="form-control"
-                      id="email"
+                      id="updateEmail"
                       placeholder="Email"
                       name="email"
                       required />
@@ -158,7 +162,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                     <input
                       type="tel"
                       class="form-control"
-                      id="phone"
+                      id="updatePhone"
                       placeholder="Phone Number"
                       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                       name="phone"
@@ -169,8 +173,10 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                 </div>
                 <!--<input type="date" id="date" name="dateCreated" hidden>-->
                 <button
+                  id="updateContactButton"
                   type="submit"
-                  class="btn btn-primary mt-2 d-inline-flex w-100 justify-content-center">
+                  class="btn btn-primary mt-2 d-inline-flex w-100 justify-content-center"
+                  onclick="handleUpdateContact()">
                   Save
                 </button>
               </form>
@@ -203,7 +209,11 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
             </div>
             <div class="modal-body">
               <!-- create contact form-->
-              <form id="new-contact-form" class="createForm" method="POST" novalidate>
+              <form
+                id="new-contact-form"
+                class="createForm"
+                method="POST"
+                novalidate>
                 <div class="mb-2">
                   <div class="input-group">
                     <div class="form-floating p-1">
@@ -261,9 +271,10 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                 </div>
                 <!--<input type="date" id="date" name="dateCreated" hidden>-->
                 <button
-                  onclick="handleCreateContact();"
+                  id="createContactButton"
                   type="submit"
-                  class="btn btn-primary mt-2 d-inline-flex w-100 justify-content-center">
+                  class="btn btn-primary mt-2 d-inline-flex w-100 justify-content-center"
+                  onclick="handleCreateContact()">
                   Submit
                 </button>
               </form>
@@ -303,10 +314,10 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                   No
                 </button>
                 <button
-                  onclick="handleDeleteContact();"
                   class="btn btn-success form-control"
-                  id="confirmDelete"
-                  aria-label="Yes button">
+                  id="deleteContactButton"
+                  aria-label="Yes button"
+                  onclick="handleDeleteContact();">
                   Yes
                 </button>
               </div>
