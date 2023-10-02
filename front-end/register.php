@@ -129,12 +129,13 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
         </div>
         <span>Already a user? </span>
         <a href="index.php">Sign in</a><br /><br />
-        <a
+        <button
+          id="signupButton"
           class="btn btn-primary w-100 py-2"
           type="submit"
           onclick="handleSignUp();">
           Create account
-        </a>
+        </button>
         <p class="mt-5 mb-3 text-body-secondary"></p>
       </form>
     </main>
