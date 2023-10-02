@@ -44,8 +44,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
     </head>
     <body>
       <div class="header">
-        <!-- div needed for layout spacing -->
-        <div class="d-flex align-items-center px-5">
+        <div class="d-flex align-items-center px-2 px-sm-4 px-md-5">
           Welcome
           <?php echo $username; ?>
         </div>
@@ -111,7 +110,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                 aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <!-- create contact form-->
+              <!-- update contact form-->
               <form id="new-contact-form" class="updateForm" method="POST" novalidate>
                 <div class="mb-2">
                   <div class="input-group">
@@ -123,7 +122,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                         placeholder="First Name"
                         name="firstName"
                         required />
-                      <label for="firstName">First Name</label>
+                      <label for="firstname">First Name</label>
                       <div class="invalid-feedback">Please enter a name.</div>
                     </div>
                     <div class="form-floating p-1">
@@ -134,7 +133,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                         placeholder="Last Name"
                         name="lastName"
                         required />
-                      <label for="lastName">Last Name</label>
+                      <label for="lastname">Last Name</label>
                       <div class="invalid-feedback">Please enter a name.</div>
                     </div>
                   </div>
@@ -164,7 +163,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                       name="phone"
                       required />
-                    <label for="phoneNumber">Phone Number (123-456-7890)</label>
+                    <label for="phone">Phone Number (123-456-7890)</label>
                     <div class="invalid-feedback">Format: (123-456-7890)</div>
                   </div>
                 </div>
@@ -215,7 +214,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                         placeholder="First Name"
                         name="firstName"
                         required />
-                      <label for="firstName">First Name</label>
+                      <label for="createFirstName">First Name</label>
                       <div class="invalid-feedback">Please enter a name.</div>
                     </div>
                     <div class="form-floating p-1">
@@ -226,7 +225,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                         placeholder="Last Name"
                         name="lastName"
                         required />
-                      <label for="lastName">Last Name</label>
+                      <label for="createLastName">Last Name</label>
                       <div class="invalid-feedback">Please enter a name.</div>
                     </div>
                   </div>
@@ -240,7 +239,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                       placeholder="Email"
                       name="email"
                       required />
-                    <label for="email">Email</label>
+                    <label for="createEmail">Email</label>
                     <div class="invalid-feedback">
                       Please enter a valid email.
                     </div>
@@ -256,7 +255,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                       name="phone"
                       required />
-                    <label for="phoneNumber">Phone Number (123-456-7890)</label>
+                    <label for="createPhone">Phone Number (123-456-7890)</label>
                     <div class="invalid-feedback">Format: (123-456-7890)</div>
                   </div>
                 </div>
