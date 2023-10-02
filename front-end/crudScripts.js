@@ -1,6 +1,6 @@
 let contactId = 0;
-let numOfDisplayedContacts = 0;
-displayContactList();
+let search = "";
+displayContactList("");
 
 // Update form validation
 const updateForm = document.querySelector(".updateForm");
@@ -32,17 +32,27 @@ createForm.addEventListener("submit", (e) => {
   createForm.classList.add("was-validated");
 });
 
-async function displayContactList() {
-  // Get contacts
-  let contacts = await handleGetContact();
+async function displayContactList(search) {
+  let contacts = null;
+
+  // Get all contacts or search contacts
+  if (search == "") {
+    // Clear contact list
+    $("#contact-list").empty();
+    contactId = 0;
+    contacts = await handleGetContact(search);
+  } else {
+    // Clear contact list
+    $("#contact-list").empty();
+    contactId = 0;
+    contacts = await handleSearchContact(search);
+  }
 
   // No new contacts to display
   if (contacts == null) return;
 
-  if (contacts.length == numOfDisplayedContacts) return;
-
   // Create html components for contacts and set with corrensponding data
-  for (let i = numOfDisplayedContacts; i < contacts.length; i++) {
+  for (let i = 0; i < contacts.length; i++) {
     // Appends a new contact with a bootstrap dropdown menu to the contact list.
     // Each update and delete button is given an id that that corresponds to its
     // function and its associated contacts array index. Ex. "update0" or
@@ -89,9 +99,6 @@ async function displayContactList() {
       contactId = this.id;
     };
   }
-
-  // Update number of contacts displayed
-  numOfDisplayedContacts = contacts.length;
 }
 
 async function handleCreateContact() {
@@ -132,6 +139,21 @@ async function handleCreateContact() {
 
 async function handleGetContact() {
   let response = await fetch("http://localhost:8080/back-end/contacts.php");
+
+  let data = await response.json();
+
+  if (response.status == 200) {
+    // Returns as [{id: ""}, {id: ""}, {id: ""}]
+    return data;
+  } else {
+    return null;
+  }
+}
+
+async function handleSearchContact(search) {
+  let response = await fetch(
+    "http://localhost:8080/back-end/search.php?name=" + search
+  );
 
   let data = await response.json();
 
@@ -215,3 +237,9 @@ async function handleUpdateContact() {
     alert("Error updating contact.");
   }
 }
+
+document.getElementById("search-bar").onchange = async function () {
+  search = document.getElementById("search-bar").value;
+  // Display search results
+  displayContactList(search);
+};

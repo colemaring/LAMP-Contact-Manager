@@ -157,3 +157,31 @@ function getContacts($id) {
 
     return $contacts;
 }
+
+// Grabs a list of contacts depending on search from the database
+function searchContacts($id, $name) {
+        
+        $db = connectDB();
+    
+        // If a user didn't create a contact, return an error
+        try {
+            $sql = "SELECT * FROM contacts WHERE id = :id AND (firstname LIKE :name OR lastname LIKE :name)";
+            $stmt = $db->prepare($sql);
+            $stmt->execute(['id' => $id, 'name' => $name . '%']);
+        } 
+        
+        catch (PDOException $e) {
+            echo $e.getMessage();
+            echo "1";
+            if ($e->errorInfo[1] == 1062) {
+                return null;
+            }
+        }
+    
+        // Return the contacts
+        $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        $db = null;
+    
+        return $contacts;
+}
