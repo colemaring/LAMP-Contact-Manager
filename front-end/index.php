@@ -132,7 +132,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
           <label for="floatingPassword">Password</label>
         </div>
 
-        <div class="form-check text-start my-3">
+        <!-- <div class="form-check text-start my-3">
           <input
             class="form-check-input"
             type="checkbox"
@@ -141,7 +141,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
           <label class="form-check-label" for="flexCheckDefault">
             Remember me
           </label>
-        </div>
+        </div> -->
 
         <span>Not a user?</span>
         <a href="register.php">Register here</a><br /><br />
