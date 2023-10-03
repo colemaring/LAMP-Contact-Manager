@@ -129,7 +129,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                         placeholder="First Name"
                         name="firstName"
                         required />
-                      <label for="firstname">First Name</label>
+                      <label for="updateFirstName">First Name</label>
                       <div class="invalid-feedback">Please enter a name.</div>
                     </div>
                     <div class="form-floating p-1">
@@ -140,7 +140,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                         placeholder="Last Name"
                         name="lastName"
                         required />
-                      <label for="lastname">Last Name</label>
+                      <label for="updateLastName">Last Name</label>
                       <div class="invalid-feedback">Please enter a name.</div>
                     </div>
                   </div>
@@ -154,7 +154,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                       placeholder="Email"
                       name="email"
                       required />
-                    <label for="email">Email</label>
+                    <label for="updateEmail">Email</label>
                     <div class="invalid-feedback">
                       Please enter a valid email.
                     </div>
@@ -170,11 +170,10 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                       name="phone"
                       required />
-                    <label for="phone">Phone Number (123-456-7890)</label>
+                    <label for="updatePhone">Phone Number (123-456-7890)</label>
                     <div class="invalid-feedback">Format: (123-456-7890)</div>
                   </div>
                 </div>
-                <!--<input type="date" id="date" name="dateCreated" hidden>-->
                 <button
                   id="updateContactButton"
                   type="submit"

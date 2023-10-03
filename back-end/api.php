@@ -165,7 +165,7 @@ function searchContacts($id, $name) {
     
         // If a user didn't create a contact, return an error
         try {
-            $sql = "SELECT * FROM contacts WHERE id = :id AND (firstname LIKE :name OR lastname LIKE :name)";
+            $sql = "SELECT * FROM contacts WHERE id = :id AND ( CONCAT(firstName, ' ', lastName) LIKE :name OR lastName LIKE :name )";
             $stmt = $db->prepare($sql);
             $stmt->execute(['id' => $id, 'name' => $name . '%']);
         } 
