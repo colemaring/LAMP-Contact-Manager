@@ -119,7 +119,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
             name="username"
             type="username"
             class="form-control"
-            id="floatingUsername"
+            id="floatingUsernameRegister"
             placeholder="Password" />
           <label for="floatingUsername">Username</label>
         </div>
@@ -128,7 +128,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
             name="password"
             type="password"
             class="form-control"
-            id="floatingPassword"
+            id="floatingPasswordRegister"
             placeholder="Password" />
           <label for="floatingPassword">Password</label>
         </div>

@@ -1,6 +1,13 @@
+window.onload = function() {
+  if (document.getElementById("floatingUsernameLogin"))
+    document.getElementById("floatingUsernameLogin").focus();
+  else
+  document.getElementById("floatingUsernameRegister").focus();
+};
+
 async function handleSignUp() {
-    let username = document.getElementById("floatingUsername").value;
-    let password = document.getElementById("floatingPassword").value;
+    let username = document.getElementById("floatingUsernameRegister").value;
+    let password = document.getElementById("floatingPasswordRegister").value;
   
     if (username == "" || password == "") {
       alert("Please fill in all fields.");
@@ -33,8 +40,8 @@ async function handleSignUp() {
   }
 
   async function handleLogin() {
-    let username = document.getElementById("floatingUsername").value;
-    let password = document.getElementById("floatingPassword").value;
+    let username = document.getElementById("floatingUsernameLogin").value;
+    let password = document.getElementById("floatingPasswordLogin").value;
   
     if (username == "" || password == "") {
       alert("Please fill in all fields.");
@@ -81,3 +88,20 @@ async function handleSignUp() {
       alert("Error logging out.");
     }
   }
+
+var input = document.getElementById("floatingPasswordLogin") || document.getElementById("floatingPasswordRegister")
+
+input.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    if (document.getElementById("loginButton"))
+      document.getElementById("loginButton").click()
+    else
+      document.getElementById("signupButton").click();
+  }
+});
+
+
