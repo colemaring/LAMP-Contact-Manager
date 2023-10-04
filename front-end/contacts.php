@@ -153,7 +153,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                   <div class="form-floating p-1">
                     <input
                       type="email"
-                      pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+                      pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{1,}$"
                       class="form-control"
                       id="updateEmail"
                       placeholder="Email"
@@ -251,7 +251,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                   <div class="form-floating p-1">
                     <input
                       type="email"
-                      pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+                      pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{1,}$"
                       class="form-control"
                       id="createEmail"
                       placeholder="Email"
