@@ -181,53 +181,54 @@ function getContacts($id, $page) {
 // Grabs a list of contacts depending on search from the database
 function searchContacts($id, $name) {
         
-        $db = connectDB();
+    $db = connectDB();
+
+    // If a user didn't create a contact, return an error
+    try {
+        $sql = "SELECT * FROM contacts WHERE id = :id AND ( CONCAT(firstName, ' ', lastName) LIKE :name OR lastName LIKE :name )";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':name', '%' . $name . '%', PDO::PARAM_STR);
+        $stmt->execute();
+    } 
     
-        // If a user didn't create a contact, return an error
-        try {
-            $sql = "SELECT * FROM contacts WHERE id = :id AND ( CONCAT(firstName, ' ', lastName) LIKE :name OR lastName LIKE :name )";
-            $stmt = $db->prepare($sql);
-            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-            $stmt->bindValue(':name', '%' . $name . '%', PDO::PARAM_STR);
-            $stmt->execute();
-        } 
-        
-        catch (PDOException $e) {
-            if ($e->errorInfo[1] == 1062) {
-                return null;
-            }
+    catch (PDOException $e) {
+        if ($e->errorInfo[1] == 1062) {
+            return null;
         }
-    
-        // Return the contacts
-        $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-        $db = null;
-    
-        return $contacts;
+    }
+
+    // Return the contacts
+    $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $db = null;
+
+    return $contacts;
 }
 
+// Finds the total amount of contacts a user has
 function numOfContacts($id) {
         
-        $db = connectDB();
+    $db = connectDB();
+
+    // If a user didn't create a contact, return an error
+    try {
+        $sql = "SELECT COUNT(*) FROM contacts WHERE id = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    } 
     
-        // If a user didn't create a contact, return an error
-        try {
-            $sql = "SELECT COUNT(*) FROM contacts WHERE id = :id";
-            $stmt = $db->prepare($sql);
-            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-            $stmt->execute();
-        } 
-        
-        catch (PDOException $e) {
-            if ($e->errorInfo[1] == 1062) {
-                return null;
-            }
+    catch (PDOException $e) {
+        if ($e->errorInfo[1] == 1062) {
+            return null;
         }
-    
-        // Return the contacts
-        $numContacts = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-        $db = null;
-    
-        return $numContacts;
+    }
+
+    // Return the contacts
+    $numContacts = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $db = null;
+
+    return $numContacts;
 }

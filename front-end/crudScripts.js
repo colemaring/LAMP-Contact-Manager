@@ -100,13 +100,12 @@ async function displayContactList() {
     updateButton.onclick = function () {
       // Display update dialog
       $("#modalUpdate").modal("toggle");
-      $('#modalUpdate').on('shown.bs.modal', function () {
-        $('#updateFirstName').val(contacts[i]["firstname"]);
-        $('#updateLastName').val(contacts[i]["lastname"]);
-        $('#updateEmail').val(contacts[i]["email"]);
-        $('#updatePhone').val(contacts[i]["phone"]);
-      })
-      
+      $("#modalUpdate").on("shown.bs.modal", function () {
+        $("#updateFirstName").val(contacts[i]["firstname"]);
+        $("#updateLastName").val(contacts[i]["lastname"]);
+        $("#updateEmail").val(contacts[i]["email"]);
+        $("#updatePhone").val(contacts[i]["phone"]);
+      });
 
       // Update contact to update
       contactId = this.id;
@@ -115,12 +114,12 @@ async function displayContactList() {
 }
 
 let updateCloseButton = document.getElementById("updateCloseButton");
-updateCloseButton.onclick = function() {
-  $('#updateFirstName').val("");
-  $('#updateLastName').val("");
-  $('#updateEmail').val("");
-  $('#updatePhone').val("");
-}
+updateCloseButton.onclick = function () {
+  $("#updateFirstName").val("");
+  $("#updateLastName").val("");
+  $("#updateEmail").val("");
+  $("#updatePhone").val("");
+};
 
 async function handleCreateContact() {
   let firstname = document.getElementById("createFirstName").value;
@@ -145,13 +144,18 @@ async function handleCreateContact() {
       datecreated: new Date().toISOString().slice(0, 10),
     }),
   });
-
   let data = await response.json();
 
+  // Get number of contacts
+  let countResponse = await fetch("http://localhost:8080/back-end/count.php");
+  let count = await countResponse.json();
+
+  let lastPage = Math.ceil(parseInt(count["count"]) / 5);
+
   if (response.status == 201) {
-    // Redirect to contacts page
+    // Redirect to page with new contact
     window.location.href =
-      "http://localhost:8080/front-end/contacts.php?page=" + page;
+      "http://localhost:8080/front-end/contacts.php?page=" + lastPage;
     console.log("Contact created successfully");
   } else {
     // Display error message
@@ -224,8 +228,15 @@ async function handleDeleteContact() {
 
   if (response.status == 200) {
     // Redirect to contacts page
-    window.location.href =
-      "http://localhost:8080/front-end/contacts.php?page=" + page;
+
+    if (contacts.length == 1 && page > 1) {
+      window.location.href =
+        "http://localhost:8080/front-end/contacts.php?page=" +
+        (parseInt(page) - 1);
+    } else {
+      window.location.href =
+        "http://localhost:8080/front-end/contacts.php?page=" + page;
+    }
     console.log("Contact deleted successfully");
   } else {
     // Display error message

@@ -78,12 +78,10 @@ $numPages = ceil($numContacts / $contactsPerPage);
           </div>
         </div>
       </div>
-      
+
       <div class="contact-body">
         <div class="contact-box-container">
-          <div class="text-white d-flex gap-4">
-            
-          </div>
+          <div class="text-white d-flex gap-4"></div>
           <div class="search-bar-container">
             <input
               class="search-bar"
@@ -129,7 +127,7 @@ $numPages = ceil($numContacts / $contactsPerPage);
                 Update this contact
               </div>
               <button
-                id = 'updateCloseButton'
+                id="updateCloseButton"
                 type="button"
                 class="btn-close btn-close-white"
                 data-bs-dismiss="modal"
@@ -299,7 +297,7 @@ $numPages = ceil($numContacts / $contactsPerPage);
                 <!--<input type="date" id="date" name="dateCreated" hidden>-->
                 <button
                   id="createContactButton"
-                  type="submit"
+                  type="button"
                   class="btn btn-primary mt-2 d-inline-flex w-100 justify-content-center"
                   onclick="handleCreateContact()">
                   Submit
@@ -352,7 +350,6 @@ $numPages = ceil($numContacts / $contactsPerPage);
           </div>
         </div>
       </div>
-      
 
       <nav aria-label="...">
         <ul class="pagination pagination-md">
@@ -369,11 +366,9 @@ $numPages = ceil($numContacts / $contactsPerPage);
 
                 echo "<li class='page-item $isActive'><a class='page-link' href='?page=$i'>$i</a></li>";
               }
-            ?>
+          ?>
         </ul>
       </nav>
-
-      
 
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
