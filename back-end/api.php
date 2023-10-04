@@ -31,7 +31,7 @@ function createUser(Array $data) {
 }
 
 // Grabs a user by username from the database
-function getUser(Array $data) {
+function getUser($username) {
     
     $db = connectDB();
 
@@ -39,7 +39,7 @@ function getUser(Array $data) {
     try {
         $sql = "SELECT * FROM users WHERE username = :username";
         $stmt = $db->prepare($sql);
-        $stmt->bindValue(':username', $data['username'], PDO::PARAM_STR);
+        $stmt->bindValue(':username', $username, PDO::PARAM_STR);
         $stmt->execute();
     }
 

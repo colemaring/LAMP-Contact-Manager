@@ -1,12 +1,9 @@
 <?php
 require 'api.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    $data = json_decode(file_get_contents('php://input'), true);
-
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Grab the user
-    $user = getUser($data);
+    $user = getUser($_GET['username']);
 
     // If the user does not exist, return an error
     if ($user == null) {
@@ -16,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // If the password is incorrect, return an error
-    if (password_verify($data['password'], $user['password'])) {
+    if (password_verify($_GET['password'], $user['password'])) {
         http_response_code(200);
 
         // Create a user session

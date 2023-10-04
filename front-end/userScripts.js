@@ -49,21 +49,14 @@ async function handleLogin() {
   }
 
   // Send request to login
-  let data = await fetch("http://localhost:8080/back-end/login.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
-    },
-    body: JSON.stringify({
-      username: username,
-      password: password,
-    }),
-  });
+  let response = await fetch(
+    "http://localhost:8080/back-end/login.php?username=" +
+      username +
+      "&password=" +
+      password
+  );
 
-  if (data.status == 200) {
+  if (response.status == 200) {
     // Redirect to contacts page
     window.location.href = "http://localhost:8080/front-end/contacts.php";
     console.log("Logged in successfully");
@@ -93,21 +86,18 @@ var input =
   document.getElementById("floatingPasswordLogin") ||
   document.getElementById("floatingPasswordRegister");
 
-  if (input != null)
-  {
-    input.addEventListener("keypress", function (event) {
-      // If the user presses the "Enter" key on the keyboard
-      if (event.key === "Enter") {
-        // Cancel the default action, if needed
-        event.preventDefault();
-        // Trigger the button element with a click
-        if (document.getElementById("loginButton"))
-          document.getElementById("loginButton").click();
-        else document.getElementById("signupButton").click();
-      }
-    });
-  }
+if (input != null) {
+  input.addEventListener("keypress", function (event) {
+    // If the user presses the "Enter" key on the keyboard
+    if (event.key === "Enter") {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      if (document.getElementById("loginButton"))
+        document.getElementById("loginButton").click();
+      else document.getElementById("signupButton").click();
+    }
+  });
+}
 
-  object.addEventListener("click", myScript);
-
-
+object.addEventListener("click", myScript);
