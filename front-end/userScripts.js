@@ -1,7 +1,8 @@
 window.onload = function () {
   if (document.getElementById("floatingUsernameLogin"))
     document.getElementById("floatingUsernameLogin").focus();
-  else document.getElementById("floatingUsernameRegister").focus();
+  else if (document.getElementById("floatingUsernameRegister"))
+    document.getElementById("floatingUsernameRegister").focus();
 };
 
 async function handleSignUp() {
@@ -92,14 +93,21 @@ var input =
   document.getElementById("floatingPasswordLogin") ||
   document.getElementById("floatingPasswordRegister");
 
-input.addEventListener("keypress", function (event) {
-  // If the user presses the "Enter" key on the keyboard
-  if (event.key === "Enter") {
-    // Cancel the default action, if needed
-    event.preventDefault();
-    // Trigger the button element with a click
-    if (document.getElementById("loginButton"))
-      document.getElementById("loginButton").click();
-    else document.getElementById("signupButton").click();
+  if (input != null)
+  {
+    input.addEventListener("keypress", function (event) {
+      // If the user presses the "Enter" key on the keyboard
+      if (event.key === "Enter") {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        if (document.getElementById("loginButton"))
+          document.getElementById("loginButton").click();
+        else document.getElementById("signupButton").click();
+      }
+    });
   }
-});
+
+  object.addEventListener("click", myScript);
+
+

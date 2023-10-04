@@ -100,11 +100,26 @@ async function displayContactList() {
     updateButton.onclick = function () {
       // Display update dialog
       $("#modalUpdate").modal("toggle");
+      $('#modalUpdate').on('shown.bs.modal', function () {
+        $('#updateFirstName').val(contacts[i]["firstname"]);
+        $('#updateLastName').val(contacts[i]["lastname"]);
+        $('#updateEmail').val(contacts[i]["email"]);
+        $('#updatePhone').val(contacts[i]["phone"]);
+      })
+      
 
       // Update contact to update
       contactId = this.id;
     };
   }
+}
+
+let updateCloseButton = document.getElementById("updateCloseButton");
+updateCloseButton.onclick = function() {
+  $('#updateFirstName').val("");
+  $('#updateLastName').val("");
+  $('#updateEmail').val("");
+  $('#updatePhone').val("");
 }
 
 async function handleCreateContact() {

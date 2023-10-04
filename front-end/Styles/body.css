@@ -82,7 +82,7 @@
 
 .contact-box {
     display: flex;
-    height: 47rem;
+    height: 45rem;
     /*
     max-height: 800px;
     max-height: 400px;*/
@@ -173,4 +173,11 @@
     .contact-box {
         height: 35rem;
     }
+}
+
+nav {
+    padding-top: 1rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
