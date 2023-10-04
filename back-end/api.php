@@ -4,14 +4,15 @@ require 'database.php';
 // Creates a new user and adds it to the database
 function createUser(Array $data) {
 
-
     $db = connectDB();
 
     // If a user with the same username already exists, return an error
     try {
         $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
         $stmt = $db->prepare($sql);
-        $status = $stmt->execute(['username' => $data['username'], 'password' => $data['password']]);
+        $stmt->bindValue(':username', $data['username'], PDO::PARAM_STR);
+        $stmt->bindValue(':password', $data['password'], PDO::PARAM_STR);
+        $stmt->execute();
     }
 
     catch (PDOException $e) {
@@ -38,7 +39,8 @@ function getUser(Array $data) {
     try {
         $sql = "SELECT * FROM users WHERE username = :username";
         $stmt = $db->prepare($sql);
-        $status = $stmt->execute(['username' => $data['username']]);
+        $stmt->bindValue(':username', $data['username'], PDO::PARAM_STR);
+        $stmt->execute();
     }
 
     catch (PDOException $e) {
@@ -61,11 +63,17 @@ function createContact(Array $data) {
 
     $db = connectDB();
 
-    // If a contact with the same phone number already exists, return an error
+    // If a contact can't be created for whatever reason, return an error
     try {
         $sql = "INSERT INTO contacts (id, firstname, lastname, email, phone, datecreated) VALUES (:id, :firstname, :lastname, :email, :phone, :datecreated)";
         $stmt = $db->prepare($sql);
-        $stmt->execute(['id' => $data['id'], 'firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email'], 'phone' => $data['phone'], 'datecreated' => $data['datecreated']]);
+        $stmt->bindValue(':id', $data['id'], PDO::PARAM_INT);
+        $stmt->bindValue(':firstname', $data['firstname'], PDO::PARAM_STR);
+        $stmt->bindValue(':lastname', $data['lastname'], PDO::PARAM_STR);
+        $stmt->bindValue(':email', $data['email'], PDO::PARAM_STR);
+        $stmt->bindValue(':phone', $data['phone'], PDO::PARAM_STR);
+        $stmt->bindValue(':datecreated', date("Y-m-d H:i:s"), PDO::PARAM_STR);
+        $stmt->execute();
     }
     
     catch (PDOException $e) {
@@ -90,7 +98,12 @@ function updateContact($contact_id, Array $data) {
     try {
         $sql = "UPDATE contacts SET firstname = :firstname, lastname = :lastname, email = :email, phone = :phone WHERE contact_id = :contact_id";
         $stmt = $db->prepare($sql);
-        $stmt->execute(['firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email'], 'phone' => $data['phone'], 'contact_id' => $contact_id]);
+        $stmt->bindValue(':contact_id', $contact_id, PDO::PARAM_INT);
+        $stmt->bindValue(':firstname', $data['firstname'], PDO::PARAM_STR);
+        $stmt->bindValue(':lastname', $data['lastname'], PDO::PARAM_STR);
+        $stmt->bindValue(':email', $data['email'], PDO::PARAM_STR);
+        $stmt->bindValue(':phone', $data['phone'], PDO::PARAM_STR);
+        $stmt->execute();
     }
     
     catch (PDOException $e) {
@@ -115,7 +128,8 @@ function deleteContact($contact_id) {
     try {
         $sql = "DELETE FROM contacts WHERE contact_id = :contact_id";
         $stmt = $db->prepare($sql);
-        $stmt->execute(['contact_id' => $contact_id]);
+        $stmt->bindValue(':contact_id', $contact_id, PDO::PARAM_INT);
+        $stmt->execute();
     }
 
     catch (PDOException $e) {
@@ -132,16 +146,22 @@ function deleteContact($contact_id) {
     return $row;
 }
 
-// Grabs all contacts from a user from the database
-function getContacts($id) {
+// Grabs 5 contacts from a user from the database
+function getContacts($id, $page) {
     
     $db = connectDB();
 
+    $contactsPerPage = 5;
+    $offset = ($page - 1) * $contactsPerPage;
+
     // If a user didn't create a contact, return an error
     try {
-        $sql = "SELECT * FROM contacts WHERE id = :id";
+        $sql = "SELECT * FROM contacts WHERE id = :id LIMIT :limit OFFSET :offset";
         $stmt = $db->prepare($sql);
-        $stmt->execute(['id' => $id]);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':limit', $contactsPerPage, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
     } 
     
     catch (PDOException $e) {
@@ -167,12 +187,12 @@ function searchContacts($id, $name) {
         try {
             $sql = "SELECT * FROM contacts WHERE id = :id AND ( CONCAT(firstName, ' ', lastName) LIKE :name OR lastName LIKE :name )";
             $stmt = $db->prepare($sql);
-            $stmt->execute(['id' => $id, 'name' => $name . '%']);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->bindValue(':name', '%' . $name . '%', PDO::PARAM_STR);
+            $stmt->execute();
         } 
         
         catch (PDOException $e) {
-            echo $e.getMessage();
-            echo "1";
             if ($e->errorInfo[1] == 1062) {
                 return null;
             }

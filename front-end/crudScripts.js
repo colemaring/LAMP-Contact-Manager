@@ -1,6 +1,15 @@
+// Global variables
 let contactId = 0;
 let search = "";
-displayContactList(search);
+let urlParams = new URLSearchParams(window.location.search);
+let page = urlParams.get("page");
+
+displayContactList();
+
+// Ensures you will always see a list of contacts
+if (!urlParams.has("page")) {
+  window.location.href = "http://localhost:8080/front-end/contacts.php?page=1";
+}
 
 // Update form validation
 const updateForm = document.querySelector(".updateForm");
@@ -32,18 +41,18 @@ createForm.addEventListener("submit", (e) => {
   createForm.classList.add("was-validated");
 });
 
-async function displayContactList(search) {
+async function displayContactList() {
   let contacts = null;
 
   // Get all contacts or search contacts
   if (search == "") {
     // Clear contact list
     $("#contact-list").empty();
-    contacts = await handleGetContact(search);
+    contacts = await handleGetContact();
   } else {
     // Clear contact list
     $("#contact-list").empty();
-    contacts = await handleSearchContact(search);
+    contacts = await handleSearchContact();
   }
 
   // No new contacts to display
@@ -78,7 +87,6 @@ async function displayContactList(search) {
 
     // Sets the functionality of the delete button on a contact item
     let deleteButton = document.getElementById("delete" + i);
-
     deleteButton.onclick = function () {
       // Display confirmation dialog
       $("#modalDelete").modal("toggle");
@@ -87,8 +95,8 @@ async function displayContactList(search) {
       contactId = this.id;
     };
 
+    // Sets the functionality of the update button on a contact item
     let updateButton = document.getElementById("update" + i);
-
     updateButton.onclick = function () {
       // Display update dialog
       $("#modalUpdate").modal("toggle");
@@ -127,8 +135,9 @@ async function handleCreateContact() {
 
   if (data.status == 201) {
     // Redirect to contacts page
-    window.location.href = "http://localhost:8080/front-end/contacts.php";
-    alert(data["message"]);
+    window.location.href =
+      "http://localhost:8080/front-end/contacts.php?page=" + page;
+    console.log("Contact created successfully");
   } else {
     // Display error message
     alert(data["message"]);
@@ -136,7 +145,9 @@ async function handleCreateContact() {
 }
 
 async function handleGetContact() {
-  let response = await fetch("http://localhost:8080/back-end/contacts.php");
+  let response = await fetch(
+    "http://localhost:8080/back-end/contacts.php?page=" + page
+  );
 
   let data = await response.json();
 
@@ -148,7 +159,7 @@ async function handleGetContact() {
   }
 }
 
-async function handleSearchContact(search) {
+async function handleSearchContact() {
   let response = await fetch(
     "http://localhost:8080/back-end/search.php?name=" + search
   );
@@ -164,18 +175,20 @@ async function handleSearchContact(search) {
 }
 
 async function handleDeleteContact() {
-  let contacts = [];
+  let contacts = null;
 
   // Get contacts
   if (search == "") {
     // Clear contact list
     $("#contact-list").empty();
-    contacts = await handleGetContact(search);
+    contacts = await handleGetContact();
   } else {
     // Clear contact list
     $("#contact-list").empty();
-    contacts = await handleSearchContact(search);
+    contacts = await handleSearchContact();
   }
+
+  if (contacts == null) return;
 
   // Get contact from last char of id
   let contact_id = contacts[contactId.slice(-1)]["contact_id"];
@@ -196,7 +209,8 @@ async function handleDeleteContact() {
 
   if (response.status == 200) {
     // Redirect to contacts page
-    window.location.href = "http://localhost:8080/front-end/contacts.php";
+    window.location.href =
+      "http://localhost:8080/front-end/contacts.php?page=" + page;
     console.log("Contact deleted successfully");
   } else {
     // Display error message
@@ -205,17 +219,17 @@ async function handleDeleteContact() {
 }
 
 async function handleUpdateContact() {
-  let contacts = [];
+  let contacts = null;
 
   // Get contacts
   if (search == "") {
     // Clear contact list
     $("#contact-list").empty();
-    contacts = await handleGetContact(search);
+    contacts = await handleGetContact();
   } else {
     // Clear contact list
     $("#contact-list").empty();
-    contacts = await handleSearchContact(search);
+    contacts = await handleSearchContact();
   }
 
   // Get contact from last char of id
@@ -248,7 +262,8 @@ async function handleUpdateContact() {
 
   if (response.status == 200) {
     // Redirect to contacts page
-    window.location.href = "http://localhost:8080/front-end/contacts.php";
+    window.location.href =
+      "http://localhost:8080/front-end/contacts.php?page=" + page;
     console.log("Contact updated successfully");
   } else {
     // Display error message
@@ -259,5 +274,5 @@ async function handleUpdateContact() {
 document.getElementById("search-bar").oninput = async function () {
   search = document.getElementById("search-bar").value;
   // Display search results
-  displayContactList(search);
+  displayContactList();
 };
