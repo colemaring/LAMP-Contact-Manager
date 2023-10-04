@@ -124,7 +124,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
           <label for="floatingInput">Username</label>
         </div>
         <div class="form-floating">
-          <input 
+          <input
             type="password"
             class="form-control"
             id="floatingPasswordLogin"

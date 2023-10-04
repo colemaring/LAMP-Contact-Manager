@@ -133,7 +133,7 @@ async function handleCreateContact() {
 
   let data = await response.json();
 
-  if (data.status == 201) {
+  if (response.status == 201) {
     // Redirect to contacts page
     window.location.href =
       "http://localhost:8080/front-end/contacts.php?page=" + page;

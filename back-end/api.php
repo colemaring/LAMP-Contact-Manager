@@ -205,3 +205,29 @@ function searchContacts($id, $name) {
     
         return $contacts;
 }
+
+function numOfContacts($id) {
+        
+        $db = connectDB();
+    
+        // If a user didn't create a contact, return an error
+        try {
+            $sql = "SELECT COUNT(*) FROM contacts WHERE id = :id";
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+        } 
+        
+        catch (PDOException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                return null;
+            }
+        }
+    
+        // Return the contacts
+        $numContacts = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        $db = null;
+    
+        return $numContacts;
+}
