@@ -147,7 +147,7 @@ function deleteContact($contact_id) {
 }
 
 // Grabs 5 contacts from a user from the database
-function getContacts($id, $page) {
+function getContacts($id, $name, $page) {
     
     $db = connectDB();
 
@@ -156,39 +156,12 @@ function getContacts($id, $page) {
 
     // If a user didn't create a contact, return an error
     try {
-        $sql = "SELECT * FROM contacts WHERE id = :id LIMIT :limit OFFSET :offset";
+        $sql = "SELECT * FROM contacts WHERE id = :id AND (CONCAT(firstName, ' ', lastName) LIKE :name OR lastName LIKE :name) LIMIT :limit OFFSET :offset";
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':name', $name . '%', PDO::PARAM_STR);
         $stmt->bindValue(':limit', $contactsPerPage, PDO::PARAM_INT);
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-        $stmt->execute();
-    } 
-    
-    catch (PDOException $e) {
-        if ($e->errorInfo[1] == 1062) {
-            return null;
-        }
-    }
-
-    // Return the contacts
-    $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    $db = null;
-
-    return $contacts;
-}
-
-// Grabs a list of contacts depending on search from the database
-function searchContacts($id, $name) {
-        
-    $db = connectDB();
-
-    // If a user didn't create a contact, return an error
-    try {
-        $sql = "SELECT * FROM contacts WHERE id = :id AND ( CONCAT(firstName, ' ', lastName) LIKE :name OR lastName LIKE :name )";
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-        $stmt->bindValue(':name', '%' . $name . '%', PDO::PARAM_STR);
         $stmt->execute();
     } 
     

@@ -364,7 +364,7 @@ $numPages = ceil($numContacts / $contactsPerPage);
                 else
                   $isActive = "";
 
-                echo "<li class='page-item $isActive'><a class='page-link' href='?page=$i'>$i</a></li>";
+                echo "<li class='page-item $isActive'><a class='page-link' href='?page=$i&name='>$i</a></li>";
               }
           ?>
         </ul>

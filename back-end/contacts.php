@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     session_start();
 
-    $contacts = getContacts($_SESSION['user_id'], $_GET['page']);
+    $contacts = getContacts($_SESSION['user_id'], $_GET['name'], $_GET['page']);
 
     if ($contacts == null) {
         http_response_code(404);
