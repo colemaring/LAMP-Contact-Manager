@@ -5,6 +5,7 @@ let page = urlParams.get("page");
 let search = urlParams.get("name");
 
 displayContactList();
+displayPageButtons();
 
 // Ensures you will always see a list of contacts
 if (!urlParams.has("page") || !urlParams.has("name")) {
@@ -104,6 +105,29 @@ async function displayContactList() {
   }
 }
 
+async function displayPageButtons() {
+  // Get number of contacts
+  let countResponse = await fetch(
+    "http://localhost:8080/back-end/count.php?name=" + search
+  );
+  let count = await countResponse.json();
+
+  let lastPage = Math.ceil(parseInt(count["count"]) / 5);
+
+  // Display page buttons
+  for (let i = 1; i <= lastPage; i++) {
+    $("#page-list").append(
+      '<div class="page-item"><a class="page-link" href="http://localhost:8080/front-end/contacts.php?page=' +
+        i +
+        "&name=" +
+        search +
+        '">' +
+        i +
+        "</a></div>"
+    );
+  }
+}
+
 let updateCloseButton = document.getElementById("updateCloseButton");
 updateCloseButton.onclick = function () {
   $("#updateFirstName").val("");
@@ -138,7 +162,9 @@ async function handleCreateContact() {
   let data = await response.json();
 
   // Get number of contacts
-  let countResponse = await fetch("http://localhost:8080/back-end/count.php");
+  let countResponse = await fetch(
+    "http://localhost:8080/back-end/count.php?name="
+  );
   let count = await countResponse.json();
 
   let lastPage = Math.ceil(parseInt(count["count"]) / 5);
@@ -148,8 +174,7 @@ async function handleCreateContact() {
     window.location.href =
       "http://localhost:8080/front-end/contacts.php?page=" +
       lastPage +
-      "&name=" +
-      search;
+      "&name="
     console.log("Contact created successfully");
   } else {
     // Display error message
@@ -258,7 +283,10 @@ async function handleUpdateContact() {
   if (response.status == 200) {
     // Redirect to contacts page
     window.location.href =
-      "http://localhost:8080/front-end/contacts.php?page=" + page;
+      "http://localhost:8080/front-end/contacts.php?page=" +
+      page +
+      "&name=" +
+      search;
     console.log("Contact updated successfully");
   } else {
     // Display error message

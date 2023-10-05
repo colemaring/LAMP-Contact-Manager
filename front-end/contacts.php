@@ -1,5 +1,4 @@
 <?php
-require '../back-end/api.php';
 
 // If the user is not logged in, redirect to login page
 session_start();
@@ -11,10 +10,6 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
     header("Location: index.php");
     exit();
 }
-
-$contactsPerPage = 5;
-$numContacts = intval(numOfContacts($_SESSION['user_id'])['COUNT(*)']);
-$numPages = ceil($numContacts / $contactsPerPage);
 ?>
 
 <!DOCTYPE html>
@@ -82,30 +77,30 @@ $numPages = ceil($numContacts / $contactsPerPage);
       <div class="contact-body">
         <div class="contact-box-container">
           <div class="text-white d-flex gap-4"></div>
-            <div class="search-bar-container d-flex flex-row">
-              <form class="w-100 d-flex" id="search-form">
-                <input
-                  class="w-100 search-bar"
-                  type="text"
-                  placeholder="Search"
-                  id="search-bar" />
-                <button class="search-button" type="submit">
-                  <img
-                    class="search-button-icon"
-                    src="icons/search-icon.svg"
-                    alt="search button" />
-                </button>
-              </form>
-                <button
-                  class="new-contact-button"
-                  data-bs-toggle="modal"
-                  data-bs-target="#modal">
-                  <img
-                    class="new-contact-icon"
-                    src="icons/plus-icon.svg"
-                    alt="add new contact button" />
-                </button>
-            </div>
+          <div class="search-bar-container d-flex flex-row">
+            <form class="w-100 d-flex" id="search-form">
+              <input
+                class="w-100 search-bar"
+                type="text"
+                placeholder="Search"
+                id="search-bar" />
+              <button class="search-button" type="submit">
+                <img
+                  class="search-button-icon"
+                  src="icons/search-icon.svg"
+                  alt="search button" />
+              </button>
+            </form>
+            <button
+              class="new-contact-button"
+              data-bs-toggle="modal"
+              data-bs-target="#modal">
+              <img
+                class="new-contact-icon"
+                src="icons/plus-icon.svg"
+                alt="add new contact button" />
+            </button>
+          </div>
           <div class="contact-box">
             <div class="contact-list" id="contact-list"></div>
           </div>
@@ -353,24 +348,7 @@ $numPages = ceil($numContacts / $contactsPerPage);
         </div>
       </div>
 
-      <nav aria-label="...">
-        <ul class="pagination pagination-md">
-          <?php
-              for ($i = 1; $i <= $numPages; $i++) {
-                $isActive = "";
-                // Store current page, else default to 1
-                $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
-
-                if ($currentPage == $i)
-                  $isActive = 'active';
-                else
-                  $isActive = "";
-
-                echo "<li class='page-item $isActive'><a class='page-link' href='?page=$i&name='>$i</a></li>";
-              }
-          ?>
-        </ul>
-      </nav>
+      <div id="page-list" class="d-flex gap-4 mt-4 justify-content-center"></div>
 
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

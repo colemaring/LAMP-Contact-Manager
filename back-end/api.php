@@ -179,16 +179,17 @@ function getContacts($id, $name, $page) {
     return $contacts;
 }
 
-// Finds the total amount of contacts a user has
-function numOfContacts($id) {
+// Finds the total amount of contacts a user has based on a search
+function numOfContacts($id, $name) {
         
     $db = connectDB();
 
     // If a user didn't create a contact, return an error
     try {
-        $sql = "SELECT COUNT(*) FROM contacts WHERE id = :id";
+        $sql = "SELECT COUNT(*) FROM contacts WHERE id = :id AND (CONCAT(firstName, ' ', lastName) LIKE :name OR lastName LIKE :name)";
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':name', $name . '%', PDO::PARAM_STR);
         $stmt->execute();
     } 
     
