@@ -146,7 +146,7 @@ async function handleCreateContact() {
   if (response.status == 201) {
     // Redirect to page with new contact
     window.location.href =
-      "http://localhost:8080/front-end/contacts.php?page=" + lastPage;
+      "http://localhost:8080/front-end/contacts.php?page=" + lastPage + "&name=" + search;
     console.log("Contact created successfully");
   } else {
     // Display error message
@@ -201,10 +201,10 @@ async function handleDeleteContact() {
     if (contacts.length == 1 && page > 1) {
       window.location.href =
         "http://localhost:8080/front-end/contacts.php?page=" +
-        (parseInt(page) - 1);
+        (parseInt(page) - 1) + "&name=" + search;
     } else {
       window.location.href =
-        "http://localhost:8080/front-end/contacts.php?page=" + page;
+        "http://localhost:8080/front-end/contacts.php?page=" + page + "&name=" + search;
     }
     console.log("Contact deleted successfully");
   } else {
