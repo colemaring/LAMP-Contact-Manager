@@ -82,28 +82,30 @@ $numPages = ceil($numContacts / $contactsPerPage);
       <div class="contact-body">
         <div class="contact-box-container">
           <div class="text-white d-flex gap-4"></div>
-          <div class="search-bar-container">
-            <input
-              class="search-bar"
-              type="text"
-              placeholder="Search"
-              id="search-bar" />
-            <button class="search-button">
-              <img
-                class="search-button-icon"
-                src="icons/search-icon.svg"
-                alt="search button" />
-            </button>
-            <button
-              class="new-contact-button"
-              data-bs-toggle="modal"
-              data-bs-target="#modal">
-              <img
-                class="new-contact-icon"
-                src="icons/plus-icon.svg"
-                alt="add new contact button" />
-            </button>
-          </div>
+            <div class="search-bar-container d-flex flex-row">
+              <form class="w-100 d-flex" id="search-form">
+                <input
+                  class="w-100 search-bar"
+                  type="text"
+                  placeholder="Search"
+                  id="search-bar" />
+                <button class="search-button" type="submit">
+                  <img
+                    class="search-button-icon"
+                    src="icons/search-icon.svg"
+                    alt="search button" />
+                </button>
+              </form>
+                <button
+                  class="new-contact-button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modal">
+                  <img
+                    class="new-contact-icon"
+                    src="icons/plus-icon.svg"
+                    alt="add new contact button" />
+                </button>
+            </div>
           <div class="contact-box">
             <div class="contact-list" id="contact-list"></div>
           </div>

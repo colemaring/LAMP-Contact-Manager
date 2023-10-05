@@ -146,7 +146,10 @@ async function handleCreateContact() {
   if (response.status == 201) {
     // Redirect to page with new contact
     window.location.href =
-      "http://localhost:8080/front-end/contacts.php?page=" + lastPage + "&name=" + search;
+      "http://localhost:8080/front-end/contacts.php?page=" +
+      lastPage +
+      "&name=" +
+      search;
     console.log("Contact created successfully");
   } else {
     // Display error message
@@ -201,10 +204,15 @@ async function handleDeleteContact() {
     if (contacts.length == 1 && page > 1) {
       window.location.href =
         "http://localhost:8080/front-end/contacts.php?page=" +
-        (parseInt(page) - 1) + "&name=" + search;
+        (parseInt(page) - 1) +
+        "&name=" +
+        search;
     } else {
       window.location.href =
-        "http://localhost:8080/front-end/contacts.php?page=" + page + "&name=" + search;
+        "http://localhost:8080/front-end/contacts.php?page=" +
+        page +
+        "&name=" +
+        search;
     }
     console.log("Contact deleted successfully");
   } else {
@@ -258,8 +266,15 @@ async function handleUpdateContact() {
   }
 }
 
-document.getElementById("search-bar").oninput = async function () {
-  search = document.getElementById("search-bar").value;
+document.getElementById("search-form").onsubmit = async function (e) {
+  e.preventDefault();
+
+  // Get search bar value
+  let name = document.getElementById("search-bar").value;
+
+  // Redirect to page with search results
+  window.location.href =
+    "http://localhost:8080/front-end/contacts.php?page=1&name=" + name;
 
   // Display search results
   displayContactList();
