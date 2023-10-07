@@ -82,10 +82,7 @@
 
 .contact-box {
     display: flex;
-    height: 45rem;
-    /*
-    max-height: 800px;
-    max-height: 400px;*/
+    height: 36rem;
     width: 100%;
     color: black;
     background-color: rgb(202, 202, 202);
@@ -164,12 +161,20 @@
 }
 
 @media (max-height: 576px) {
+    body {
+        padding-top: 6rem;
+    }
+    
     .contact-box {
         height: 20rem;
     }
 }
 
 @media (min-height: 576px) and (max-height: 768px) {
+    body {
+        padding-top: 6rem;
+    }
+    
     .contact-box {
         height: 35rem;
     }

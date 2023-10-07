@@ -52,9 +52,9 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
           <div class="logout-button-container">
             <button
               id="logoutButton"
-              class="btn btn-danger btn-lg"
+              class="btn btn-danger btn-lg text-nowrap"
               onclick="handleLogOut()">
-              Log out
+              Log out 
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"

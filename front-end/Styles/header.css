@@ -31,22 +31,6 @@
     padding-right: 6rem;
 }
 
-.logout-button {
-    font-size: 1.4em;
-    background-color: #c22b2b;
-    border: none;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s;
-    padding: 0.5em 1em;
-    white-space: nowrap;
-}
-
-.logout-button:hover {
-    background-color: #c22b2bcc;
-}
-
 .link {
     text-decoration: none;
 }
